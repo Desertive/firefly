@@ -1,0 +1,32 @@
+logging:
+    level:
+        root: INFO
+
+spring:
+    application:
+        name: Firefly
+    profiles:
+        active: development
+        
+---
+
+spring:
+    profiles: test
+        
+---
+
+spring:
+    profiles: development
+firefly:
+    server:
+        hostname: localhost
+        port: 8080
+    
+---
+
+spring:
+    profiles: release
+firefly:
+    server:
+        hostname: localhost
+        port: 3000
