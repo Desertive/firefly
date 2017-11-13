@@ -17,7 +17,7 @@ public class ValidatorFactory {
 		validator = factory.getValidator();
 	}
 
-	public <T> Boolean isValidOrThrow(T data) throws ValidationException {
+	public <T> Boolean isValidOrThrow(T data) {
 		try {
 			return isEmptyOrThrow(validator.validate(data));
 		} catch (ValidationException e) {

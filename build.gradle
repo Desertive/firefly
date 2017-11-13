@@ -22,12 +22,12 @@ repositories {
 	mavenCentral()
 }
 
-
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter:+')
 	compile('com.corundumstudio.socketio:netty-socketio:+')
 	compile('org.hibernate:hibernate-validator:+')
 	compile('org.glassfish:javax.el:+')
+	testCompile("junit:junit:4.12")
 	testCompile('org.springframework.boot:spring-boot-starter-test:+')
 	testCompile('org.hibernate:hibernate-validator:+')
 	testCompile('org.glassfish:javax.el:+')

@@ -37,7 +37,7 @@ public class ActionRequest {
 		private Integer end;
 		@NotNull(message="Section should have type of action declared")
 		private ActionType type;
-		private HashMap<String, String> properties;
+		private HashMap<String, Object> properties;
 		
 		public LedStripSection() {}
 
@@ -65,11 +65,11 @@ public class ActionRequest {
 			this.type = type;
 		}
 
-		public HashMap<String, String> getProperties() {
+		public HashMap<String, Object> getProperties() {
 			return properties;
 		}
 
-		public void setProperties(HashMap<String, String> properties) {
+		public void setProperties(HashMap<String, Object> properties) {
 			this.properties = properties;
 		}
 

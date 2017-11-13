@@ -5,6 +5,7 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Profile;
 
+import com.desertive.firefly.core.client.FireflyClientImpl;
 import com.desertive.firefly.server.SocketIOServer;
 import com.desertive.firefly.server.SocketIOServerImpl;
 import com.desertive.firefly.validator.ValidatorFactory;
@@ -25,5 +26,10 @@ public class DevelopmentConfiguration {
 				.setHostname(hostname)
 				.setPort(port)
 				.setValidator(new ValidatorFactory());
+	}
+	
+	@Bean
+	public FireflyClientImpl FireflyClient() {
+		return new FireflyClientImpl();
 	}
 }

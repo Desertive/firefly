@@ -12,6 +12,9 @@ spring:
 
 spring:
     profiles: test
+firefly:
+    core:
+        fps: 2 # Frames per second
         
 ---
 
@@ -21,7 +24,9 @@ firefly:
     server:
         hostname: localhost
         port: 8080
-    
+    core:
+        fps: 4 # Frames per second
+        
 ---
 
 spring:
@@ -30,3 +35,5 @@ firefly:
     server:
         hostname: localhost
         port: 3000
+    core:
+        fps: 4 # Frames per second

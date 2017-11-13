@@ -12,6 +12,8 @@ Run application `./gradlew bootRun`
 
 > You can test the connection with any socket.io tester. Connect to localhost:8080 and send a message with event name HEALTH_CHECK. After that you should be able to see **Up and running** message in the application console.
 
+Run unit tests `./gradlew test`
+
 Build executable JAR `./gradlew build`
 
 # Socket.io events
