@@ -2,6 +2,8 @@
 
 ![Firefly](img.png)
 
+[![Build Status](https://travis-ci.org/Desertive/firefly.png?branch=master)](https://travis-ci.org/Desertive/firefly)
+
 Firefly is a Java-based light engine for LED strips. It's mainly designed to work with Valo system, which is author's hobby project.
 
 The idea of the engine is to decouple web server, calculation engine, timer engine and data emitters to clear and manageable totality.
