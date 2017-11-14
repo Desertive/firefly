@@ -5,7 +5,6 @@ import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -13,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -25,7 +23,6 @@ import com.desertive.firefly.core.data.models.requests.ActionRequest;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
 import com.desertive.firefly.core.managers.CalculationManager;
 import com.desertive.firefly.core.managers.TimerManager;
-import com.desertive.firefly.core.services.calculation.ActionServiceFactory;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest

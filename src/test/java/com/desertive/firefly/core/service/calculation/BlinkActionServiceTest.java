@@ -1,7 +1,5 @@
 package com.desertive.firefly.core.service.calculation;
 
-import static org.junit.Assert.assertEquals;
-
 import java.util.HashMap;
 
 import org.junit.Before;
@@ -22,22 +20,27 @@ public class BlinkActionServiceTest {
 	@Before
 	public void initalizeTestEnvironment() {
 		actionService = actionServiceFactory.getInstance(ActionType.BLINK);
-		ledStripSection = new LedStripSectionBuilder()
-							.setStart(0)
-							.setEnd(5)
-							.setType(ActionType.BLINK)
-							.setProperties(new HashMap<String, Object>()
-								{{
-									put("r", 1);
-									put("g", 1);
-									put("b", 1);
-								}}
-							)
-							.build();
+		ledStripSection = buildLedStripSection();
 	}
 	
 	@Test
-	public void itShouldReturnOneTransitionStep() {
-		//assertEquals(1, 1);
+	public void itShouldReturnTwoTransitionSteps() {
+		//assertEquals(x, 2);
+	}
+	
+	private LedStripSection buildLedStripSection() {
+		return new LedStripSectionBuilder()
+				.setStart(1)
+				.setEnd(3)
+				.setType(ActionType.BLINK)
+				.setProperties(new HashMap<String, Object>()
+					{{
+						put("r", 2);
+						put("g", 2);
+						put("b", 2);
+						put("interval", 5);
+					}}
+				)
+				.build();
 	}
 }
