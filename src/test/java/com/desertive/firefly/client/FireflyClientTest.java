@@ -13,6 +13,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -24,6 +25,7 @@ import com.desertive.firefly.core.data.models.requests.ActionRequest;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
 import com.desertive.firefly.core.managers.CalculationManager;
 import com.desertive.firefly.core.managers.TimerManager;
+import com.desertive.firefly.core.services.calculation.ActionServiceFactory;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
@@ -93,16 +95,6 @@ public class FireflyClientTest {
 		fireflyClient.apply(new ArrayList<Frame>());
 		
 		verify(timerManager).applyState(Mockito.any());
-	}
-	
-	@Test
-	public void staticTypeShouldReturnOneFrame() {
-		List<Frame> frames = fireflyClient.process(actionRequest);
-		
-		// WIP:
-		// assertEquals(frames.size(), 1);
-		
-		verify(calculationManager).processActionRequest(Mockito.any(ActionRequest.class));
 	}
 	
 }

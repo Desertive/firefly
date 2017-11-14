@@ -11,13 +11,19 @@ import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
-import com.desertive.firefly.core.services.calculation.BlinkActionService;
-import com.desertive.firefly.core.services.calculation.StaticActionService;
+import com.desertive.firefly.core.services.calculation.ActionService;
+import com.desertive.firefly.core.services.calculation.ActionServiceFactory;
 
 @Service
 public class CalculationManager {
 
 	private static final Logger LOG = LoggerFactory.getLogger(CalculationManager.class);
+	
+	ActionServiceFactory actionServiceFactory;
+	
+	public CalculationManager() {
+		actionServiceFactory = new ActionServiceFactory();
+	}
 	
 	public List<Frame> processActionRequest(ActionRequest actionRequest) {
 		return actionRequest.getLedStripSections()
@@ -28,14 +34,8 @@ public class CalculationManager {
 	}
 	
 	public List<TransitionStep> convertSectionsIntoTransitions(LedStripSection ledStripSection) {
-		switch(ledStripSection.getType()) {
-			case STATIC: 
-				return new StaticActionService().generateTransitionSteps(ledStripSection);
-			case BLINK: 
-				return new BlinkActionService().generateTransitionSteps(ledStripSection);
-			default:
-				throw new IllegalArgumentException(String.format("Cannot match section type %s", ledStripSection.getType()));
-		}
+		ActionService actionService = actionServiceFactory.getInstance(ledStripSection.getType());
+		return actionService.generateTransitionSteps(ledStripSection);
 	}
 	
 	public List<Frame> convertTransitionsIntoFrames(List<TransitionStep> transitionStep) {
