@@ -4,18 +4,18 @@ import java.awt.Color;
 import java.util.List;
 
 public class Frame {
-	
+
 	/*
 	 * Indicates frame's color state
 	 */
-	private List<Color> leds;
+	private final List<Color> leds;
+	
+	public Frame(List<Color> leds) {
+		this.leds = leds;
+	}
 
 	public List<Color> getLeds() {
 		return leds;
-	}
-
-	public void setLeds(List<Color> leds) {
-		this.leds = leds;
 	}
 
 }

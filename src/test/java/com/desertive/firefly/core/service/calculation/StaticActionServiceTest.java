@@ -58,7 +58,7 @@ public class StaticActionServiceTest {
 
 		List<Color> containsColor = colors
 			.stream()
-			.filter(item -> item != null)
+			.filter(item -> item != null && item.equals(new Color(1, 1, 1)))
 			.collect(Collectors.toList());
 		assertEquals(containsColor.size(), 4);
 	}
@@ -67,7 +67,7 @@ public class StaticActionServiceTest {
 		return new LedStripSectionBuilder()
 				.setStart(3)
 				.setEnd(6)
-				.setType(ActionType.BLINK)
+				.setType(ActionType.STATIC)
 				.setProperties(new HashMap<String, Object>()
 					{{
 						put("r", 1);

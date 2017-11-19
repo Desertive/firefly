@@ -60,7 +60,7 @@ You can have as many sections as you like. One section might have blue static li
 
 :white_check_mark: Request validation
 
-:white_check_mark: Initalize core structure
+:white_check_mark: Initalization of core structure
 
 :black_square_button: Calculation flow for STATIC action type
 
@@ -68,9 +68,7 @@ You can have as many sections as you like. One section might have blue static li
 
 :black_square_button: Timer engine
 
-:black_square_button: Create timer engine
-
-:black_square_button: Create response stream for receivers
+:black_square_button: Response stream for receivers
 
 # Kudos
 - Image design by [Flaticon](https://www.flaticon.com/)
