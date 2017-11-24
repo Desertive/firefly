@@ -20,12 +20,12 @@ public class LinearEasingService implements EasingService {
     public List<Color> easeTransition(Color current, Color next, int steps) {
         int segments = steps + 1;
         return IntStream.rangeClosed(1, steps)
-                .mapToObj(step -> current == null ? null : new Color(
-                        calculateColor(current.getRed(), next.getRed(), step, segments),
-                        calculateColor(current.getGreen(), next.getGreen(), step, segments),
-                        calculateColor(current.getBlue(), next.getBlue(), step, segments)
-                ))
-                .collect(Collectors.toList());
+            .mapToObj(step -> current == null ? null : new Color(
+                calculateColor(current.getRed(), next.getRed(), step, segments),
+                calculateColor(current.getGreen(), next.getGreen(), step, segments),
+                calculateColor(current.getBlue(), next.getBlue(), step, segments)
+            ))
+            .collect(Collectors.toList());
     }
 
     int calculateColor(int currentColor, int nextColor, int step, int segments) {

@@ -6,7 +6,7 @@ public class EasingServiceFactory {
     LinearEasingService linearEasingService = new LinearEasingService();
 
     public EasingService getInstance(EasingType easingType) {
-        switch(easingType) {
+        switch (easingType) {
             case LINEAR:
                 return linearEasingService;
             default:

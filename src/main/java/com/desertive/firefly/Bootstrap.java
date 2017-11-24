@@ -12,24 +12,24 @@ import org.springframework.stereotype.Component;
 import com.desertive.firefly.server.SocketIOServer;
 
 @Component
-@Profile({"development","release"})
+@Profile({"development", "release"})
 public class Bootstrap {
 
-	private static final Logger LOG = LoggerFactory.getLogger(FireflyApplication.class);
+    private static final Logger LOG = LoggerFactory.getLogger(FireflyApplication.class);
 
-	@Autowired
-	private SocketIOServer server;
+    @Autowired
+    private SocketIOServer server;
 
-	@PostConstruct
-	public void start() {
-		LOG.info("Starting server");
-		server.createServer().start();
-	}
+    @PostConstruct
+    public void start() {
+        LOG.info("Starting server");
+        server.createServer().start();
+    }
 
-	@PreDestroy
-	public void stop() {
-		LOG.info("Stopping server");
-		server.stop();
-	}
+    @PreDestroy
+    public void stop() {
+        LOG.info("Stopping server");
+        server.stop();
+    }
 
 }

@@ -11,68 +11,70 @@ import javax.validation.constraints.Size;
 import com.desertive.firefly.core.data.models.ActionType;
 
 public class ActionRequest {
-	
-	@NotNull(message="There should be sections Array present")
-	@Size(min=1)
-	@Valid
-	private List<LedStripSection> ledStripSections;
-	
-    public ActionRequest() {}
 
-	public List<LedStripSection> getLedStripSections() {
-		return ledStripSections;
-	}
+    @NotNull(message = "There should be sections Array present")
+    @Size(min = 1)
+    @Valid
+    private List<LedStripSection> ledStripSections;
 
-	public void setLedStripSections(List<LedStripSection> ledStripSections) {
-		this.ledStripSections = ledStripSections;
-	}
+    public ActionRequest() {
+    }
 
-	public static class LedStripSection {
+    public List<LedStripSection> getLedStripSections() {
+        return ledStripSections;
+    }
 
-		@NotNull(message="Section should have starting point")
-		@Min(0)
-		private Integer start;
-		@NotNull(message="Section should have ending point")
-		@Min(0)
-		private Integer end;
-		@NotNull(message="Section should have type of action declared")
-		private ActionType type;
-		private HashMap<String, Object> properties;
-		
-		public LedStripSection() {}
+    public void setLedStripSections(List<LedStripSection> ledStripSections) {
+        this.ledStripSections = ledStripSections;
+    }
 
-		public Integer getStart() {
-			return start;
-		}
+    public static class LedStripSection {
 
-		public void setStart(Integer start) {
-			this.start = start;
-		}
+        @NotNull(message = "Section should have starting point")
+        @Min(0)
+        private Integer start;
+        @NotNull(message = "Section should have ending point")
+        @Min(0)
+        private Integer end;
+        @NotNull(message = "Section should have type of action declared")
+        private ActionType type;
+        private HashMap<String, Object> properties;
 
-		public Integer getEnd() {
-			return end;
-		}
+        public LedStripSection() {
+        }
 
-		public void setEnd(Integer end) {
-			this.end = end;
-		}
+        public Integer getStart() {
+            return start;
+        }
 
-		public ActionType getType() {
-			return type;
-		}
+        public void setStart(Integer start) {
+            this.start = start;
+        }
 
-		public void setType(ActionType type) {
-			this.type = type;
-		}
+        public Integer getEnd() {
+            return end;
+        }
 
-		public HashMap<String, Object> getProperties() {
-			return properties;
-		}
+        public void setEnd(Integer end) {
+            this.end = end;
+        }
 
-		public void setProperties(HashMap<String, Object> properties) {
-			this.properties = properties;
-		}
+        public ActionType getType() {
+            return type;
+        }
 
-	}
+        public void setType(ActionType type) {
+            this.type = type;
+        }
+
+        public HashMap<String, Object> getProperties() {
+            return properties;
+        }
+
+        public void setProperties(HashMap<String, Object> properties) {
+            this.properties = properties;
+        }
+
+    }
 
 }

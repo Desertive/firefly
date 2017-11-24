@@ -11,23 +11,23 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public class StaticActionService extends ActionService {
 
-	/*
-	 * Static action presents only one static color without animation
-	 */
-	public List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection) {
-		// Get base color
-		Color baseColor = super.getColor(ledStripSection.getProperties());
+    /*
+     * Static action presents only one static color without animation
+     */
+    public List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection) {
+        // Get base color
+        Color baseColor = super.getColor(ledStripSection.getProperties());
 
-		// Construct led mask
-		List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
+        // Construct led mask
+        List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
 
-		// Init led array
-		List<Color> leds = mask.stream()
-				.map(i -> i == 1 ? baseColor : null) // Set base color based to mask
-				.collect(Collectors.toList());
+        // Init led array
+        List<Color> leds = mask.stream()
+            .map(i -> i == 1 ? baseColor : null) // Set base color based to mask
+            .collect(Collectors.toList());
 
-		// Because there are no animation, build one step and return it
-		return Arrays.asList(new TransitionStep(leds));
-	}
+        // Because there are no animation, build one step and return it
+        return Arrays.asList(new TransitionStep(leds));
+    }
 
 }
