@@ -1,4 +1,4 @@
-package com.desertive.firefly.core.services.calculation;
+package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
 import java.util.Arrays;

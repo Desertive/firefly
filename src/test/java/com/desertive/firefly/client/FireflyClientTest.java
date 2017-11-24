@@ -12,6 +12,7 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mockito;
 import org.mockito.Spy;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.ActiveProfiles;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -29,14 +30,15 @@ import com.desertive.firefly.core.managers.TimerManager;
 @ActiveProfiles("test")
 public class FireflyClientTest {
 	
-	private ActionRequest actionRequest;
-	
+	ActionRequest actionRequest;
+
 	@Spy
 	CalculationManager calculationManager;
-	
+
 	@Spy
 	TimerManager timerManager;
-	
+
+	@Autowired
 	@InjectMocks
 	FireflyClientImpl fireflyClient;
 	
@@ -76,21 +78,21 @@ public class FireflyClientTest {
 	@Test
 	public void processAndExecuteShouldCallCalculationManager() {
 		fireflyClient.processAndApply(actionRequest);
-		
+
 		verify(calculationManager).processActionRequest(Mockito.any(ActionRequest.class));
 	}
 	
 	@Test
 	public void processShouldCallCalculationManager() {
 		fireflyClient.process(actionRequest);
-		
+
 		verify(calculationManager).processActionRequest(Mockito.any(ActionRequest.class));
 	}
 
 	@Test
 	public void executeShouldCallTimerManager() {
 		fireflyClient.apply(new ArrayList<Frame>());
-		
+
 		verify(timerManager).applyState(Mockito.any());
 	}
 	

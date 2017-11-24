@@ -12,23 +12,23 @@ public class TransitionStep {
 	/*
 	 * Indicates how many frames it should take to make the transition to the next step
 	 */
-	private final Integer transitionTime;
+	private final int transitionTime;
 	/*
 	 * Indicates how long (in frames) timer engine should freeze this step's state
 	 */
-	private final Integer sleep;
+	private final int sleep;
 	
 	public TransitionStep(List<Color> leds) {
 		this.leds = leds;
-		this.transitionTime = null;
-		this.sleep = null;
+		this.transitionTime = 0;
+		this.sleep = 1;
 	}
 	
 	public TransitionStep(List<Color> leds,
 			Integer transitionTime) {
 		this.leds = leds;
 		this.transitionTime = transitionTime;
-		this.sleep = null;
+		this.sleep = 1;
 	}
 	
 	public TransitionStep(List<Color> leds,
@@ -43,11 +43,11 @@ public class TransitionStep {
 		return leds;
 	}
 
-	public Integer getTransitionTime() {
+	public int getTransitionTime() {
 		return transitionTime;
 	}
 
-	public Integer getSleep() {
+	public int getSleep() {
 		return sleep;
 	}
 }
