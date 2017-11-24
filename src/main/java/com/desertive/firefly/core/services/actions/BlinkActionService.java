@@ -1,4 +1,4 @@
-package com.desertive.firefly.core.services.calculation;
+package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
 import java.util.Arrays;
@@ -26,7 +26,7 @@ public class BlinkActionService extends ActionService {
 		// Transition time calculated from the interval property. Interval represents
 		// the whole blink animation so one transition equals to half of the interval's
 		// time.
-		Integer transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2;
+		int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2;
 
 		// Construct led mask
 		List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());

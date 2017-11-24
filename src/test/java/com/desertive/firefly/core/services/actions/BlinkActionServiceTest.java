@@ -1,4 +1,4 @@
-package com.desertive.firefly.core.service.calculation;
+package com.desertive.firefly.core.services.actions;
 
 import static org.junit.Assert.assertEquals;
 
@@ -14,8 +14,8 @@ import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
 import com.desertive.firefly.core.data.models.ActionType;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
-import com.desertive.firefly.core.services.calculation.ActionService;
-import com.desertive.firefly.core.services.calculation.ActionServiceFactory;
+import com.desertive.firefly.core.services.actions.ActionService;
+import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 
 public class BlinkActionServiceTest {
 
@@ -35,8 +35,8 @@ public class BlinkActionServiceTest {
 	}
 	
 	@Test
-	public void transitionStepSleepShouldBeNull() {
-		assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getSleep(), null);
+	public void transitionStepSleepShouldBeOne() {
+		assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getSleep(), 1);
 	}
 	
 	@Test
