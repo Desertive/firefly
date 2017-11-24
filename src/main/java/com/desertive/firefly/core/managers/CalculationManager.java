@@ -34,7 +34,7 @@ public class CalculationManager {
 		return actionRequest.getLedStripSections().stream()
 				.map(this::convertSectionsIntoSteps) // 1. Convert each section into list of transition steps
 				.map(frameService::convertStepsIntoFrames) // 2. Convert each transition step list into list of frames
-				.reduce(new ArrayList<>(), frameService::mergeFrames); // 3. Merge frame lists
+				.reduce(new ArrayList<>(), frameService::mergeFrameLists); // 3. Merge frame lists
 	}
 
 	List<TransitionStep> convertSectionsIntoSteps(LedStripSection ledStripSection) {
