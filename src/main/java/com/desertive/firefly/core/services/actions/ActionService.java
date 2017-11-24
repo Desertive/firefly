@@ -11,22 +11,22 @@ import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSec
 import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
-	
-	public Color getColor(HashMap<String, Object> properties) {
-		return new Color(
-				ActionRequestUtil.getIntPropertyOrThrow(properties, "r"),
-				ActionRequestUtil.getIntPropertyOrThrow(properties, "g"),
-				ActionRequestUtil.getIntPropertyOrThrow(properties, "b"));
-	}
-	
-	public List<Integer> generateLedMask(Integer start, Integer end) {
-		return IntStream.rangeClosed(0, end)
-				.map(i -> i >= start ? 1 : 0) // Mask for the led array.
-																	// 0 = set null, 1 = set base color
-				.boxed()
-				.collect(Collectors.toList());
-	}
 
-	public abstract List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection);
-	
+    public Color getColor(HashMap<String, Object> properties) {
+        return new Color(
+            ActionRequestUtil.getIntPropertyOrThrow(properties, "r"),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, "g"),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, "b"));
+    }
+
+    public List<Integer> generateLedMask(Integer start, Integer end) {
+        return IntStream.rangeClosed(0, end)
+            .map(i -> i >= start ? 1 : 0) // Mask for the led array.
+            // 0 = set null, 1 = set base color
+            .boxed()
+            .collect(Collectors.toList());
+    }
+
+    public abstract List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection);
+
 }

@@ -14,22 +14,22 @@ import com.desertive.firefly.validator.ValidatorFactory;
 @Profile("development")
 public class DevelopmentConfiguration {
 
-	@Value("${firefly.server.hostname}")
-	private String hostname;
+    @Value("${firefly.server.hostname}")
+    private String hostname;
 
-	@Value("${firefly.server.port}")
-	private Integer port;
+    @Value("${firefly.server.port}")
+    private Integer port;
 
-	@Bean
-	public SocketIOServer SocketIOServer() {
-		return new SocketIOServerImpl()
-				.setHostname(hostname)
-				.setPort(port)
-				.setValidator(new ValidatorFactory());
-	}
-	
-	@Bean
-	public FireflyClientImpl FireflyClient() {
-		return new FireflyClientImpl();
-	}
+    @Bean
+    public SocketIOServer SocketIOServer() {
+        return new SocketIOServerImpl()
+            .setHostname(hostname)
+            .setPort(port)
+            .setValidator(new ValidatorFactory());
+    }
+
+    @Bean
+    public FireflyClientImpl FireflyClient() {
+        return new FireflyClientImpl();
+    }
 }

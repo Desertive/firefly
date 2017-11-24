@@ -19,27 +19,27 @@ import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 @Service
 public class CalculationManager {
 
-	private static final Logger LOG = LoggerFactory.getLogger(CalculationManager.class);
+    private static final Logger LOG = LoggerFactory.getLogger(CalculationManager.class);
 
-	@Autowired
-	FrameService frameService;
+    @Autowired
+    FrameService frameService;
 
-	ActionServiceFactory actionServiceFactory;
+    ActionServiceFactory actionServiceFactory;
 
-	public CalculationManager() {
-		actionServiceFactory = new ActionServiceFactory();
-	}
+    public CalculationManager() {
+        actionServiceFactory = new ActionServiceFactory();
+    }
 
-	public List<Frame> processActionRequest(ActionRequest actionRequest) {
-		return actionRequest.getLedStripSections().stream()
-				.map(this::convertSectionsIntoSteps) // 1. Convert each section into list of transition steps
-				.map(frameService::convertStepsIntoFrames) // 2. Convert each transition step list into list of frames
-				.reduce(new ArrayList<>(), frameService::mergeFrameLists); // 3. Merge frame lists
-	}
+    public List<Frame> processActionRequest(ActionRequest actionRequest) {
+        return actionRequest.getLedStripSections().stream()
+            .map(this::convertSectionsIntoSteps) // 1. Convert each section into list of transition steps
+            .map(frameService::convertStepsIntoFrames) // 2. Convert each transition step list into list of frames
+            .reduce(new ArrayList<>(), frameService::mergeFrameLists); // 3. Merge frame lists
+    }
 
-	List<TransitionStep> convertSectionsIntoSteps(LedStripSection ledStripSection) {
-		ActionService actionService = actionServiceFactory.getInstance(ledStripSection.getType());
-		return actionService.generateTransitionSteps(ledStripSection);
-	}
+    List<TransitionStep> convertSectionsIntoSteps(LedStripSection ledStripSection) {
+        ActionService actionService = actionServiceFactory.getInstance(ledStripSection.getType());
+        return actionService.generateTransitionSteps(ledStripSection);
+    }
 
 }

@@ -10,11 +10,11 @@ import com.desertive.firefly.core.data.models.Frame;
 
 @Service
 public class TimerManager {
-	
-	private static final Logger LOG = LoggerFactory.getLogger(TimerManager.class);
-	
-	public void applyState(List<Frame> frames) {
-		LOG.info("TimeManager applyState called");
-	}
+
+    private static final Logger LOG = LoggerFactory.getLogger(TimerManager.class);
+
+    public void applyState(List<Frame> frames) {
+        LOG.info("TimeManager applyState called");
+    }
 
 }

@@ -13,30 +13,30 @@ import com.desertive.firefly.server.SocketIOServer;
 @Controller
 public class ConnectionListener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ConnectionListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ConnectionListener.class);
 
-	@Autowired
-	private SocketIOServer server;
+    @Autowired
+    private SocketIOServer server;
 
-	@PostConstruct
-	public void init() {
+    @PostConstruct
+    public void init() {
 
 		/*
-		 * Bind methods to socket.io listeners. Binding could also be done via
+         * Bind methods to socket.io listeners. Binding could also be done via
 		 * annotations. Feel free to refactor!
 		 */
-		server.addConnectListener(this::onConnect);
-		server.addDisconnectListener(this::onDisconnect);
+        server.addConnectListener(this::onConnect);
+        server.addDisconnectListener(this::onDisconnect);
 
-		LOG.debug("ConnectionListener initialized");
-	}
+        LOG.debug("ConnectionListener initialized");
+    }
 
-	private void onConnect(SocketIOClient client) {
-		LOG.info("New client connected! " + client.getSessionId());
-	}
+    private void onConnect(SocketIOClient client) {
+        LOG.info("New client connected! " + client.getSessionId());
+    }
 
-	private void onDisconnect(SocketIOClient client) {
-		LOG.info("Client disconnected. " + client.getSessionId());
-	}
+    private void onDisconnect(SocketIOClient client) {
+        LOG.info("Client disconnected. " + client.getSessionId());
+    }
 
 }

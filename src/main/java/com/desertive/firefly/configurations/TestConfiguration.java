@@ -12,14 +12,14 @@ import com.desertive.firefly.server.SocketIOServer;
 @Profile("test")
 public class TestConfiguration {
 
-	@Bean
-	public SocketIOServer SocketIOServer() {
-		return new SocketIOServerImpl().createServer();
-	}
-	
-	@Bean
-	public FireflyClientImpl FireflyClient() {
-		return new FireflyClientImpl();
-	}
+    @Bean
+    public SocketIOServer SocketIOServer() {
+        return new SocketIOServerImpl().createServer();
+    }
+
+    @Bean
+    public FireflyClientImpl FireflyClient() {
+        return new FireflyClientImpl();
+    }
 
 }

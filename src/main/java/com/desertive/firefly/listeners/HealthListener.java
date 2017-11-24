@@ -13,25 +13,25 @@ import com.desertive.firefly.server.SocketIOServer.Event;
 @Controller
 public class HealthListener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(HealthListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(HealthListener.class);
 
-	@Autowired
-	private SocketIOServer server;
+    @Autowired
+    private SocketIOServer server;
 
-	@PostConstruct
-	public void init() {
+    @PostConstruct
+    public void init() {
 
 		/*
-		 * Bind methods to socket.io listeners. Binding could also be done via
+         * Bind methods to socket.io listeners. Binding could also be done via
 		 * annotations. Feel free to refactor!
 		 */
-		server.addEventListener(Event.HEALTH_CHECK, String.class, this::healthCheckEvent);
+        server.addEventListener(Event.HEALTH_CHECK, String.class, this::healthCheckEvent);
 
-		LOG.debug("HealthListener initialized");
-	}
+        LOG.debug("HealthListener initialized");
+    }
 
-	void healthCheckEvent() {
-		LOG.info("Up and running!");
-	}
+    void healthCheckEvent() {
+        LOG.info("Up and running!");
+    }
 
 }

@@ -15,30 +15,30 @@ import com.desertive.firefly.server.SocketIOServer.Event;
 @Controller
 public class ActionListener {
 
-	private static final Logger LOG = LoggerFactory.getLogger(ActionListener.class);
+    private static final Logger LOG = LoggerFactory.getLogger(ActionListener.class);
 
-	@Autowired
-	private SocketIOServer server;
-	
-	@Autowired
-	private FireflyClientImpl fireflyClient;
+    @Autowired
+    private SocketIOServer server;
 
-	@PostConstruct
-	public void init() {
+    @Autowired
+    private FireflyClientImpl fireflyClient;
+
+    @PostConstruct
+    public void init() {
 
 		/*
-		 * Bind methods to socket.io listeners. Binding could also be done via
+         * Bind methods to socket.io listeners. Binding could also be done via
 		 * annotations. Feel free to refactor!
 		 */
-		server.addEventListener(Event.ACTION, ActionRequest.class, this::actionEvent);
+        server.addEventListener(Event.ACTION, ActionRequest.class, this::actionEvent);
 
-		LOG.debug("ActionListener initialized");
-	}
+        LOG.debug("ActionListener initialized");
+    }
 
-	public void actionEvent(ActionRequest actionRequest) {
-		LOG.debug("Action event called");
-		
-		fireflyClient.processAndApply(actionRequest);
-	}
+    public void actionEvent(ActionRequest actionRequest) {
+        LOG.debug("Action event called");
+
+        fireflyClient.processAndApply(actionRequest);
+    }
 
 }
