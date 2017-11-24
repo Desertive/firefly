@@ -20,7 +20,7 @@ public class LinearEasingService implements EasingService {
     public List<Color> easeTransition(Color current, Color next, int steps) {
         int segments = steps + 1;
         return IntStream.rangeClosed(1, steps)
-                .mapToObj(step -> new Color(
+                .mapToObj(step -> current == null ? null : new Color(
                         calculateColor(current.getRed(), next.getRed(), step, segments),
                         calculateColor(current.getGreen(), next.getGreen(), step, segments),
                         calculateColor(current.getBlue(), next.getBlue(), step, segments)
