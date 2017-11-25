@@ -40,8 +40,8 @@ public class BlinkActionServiceTest {
     }
 
     @Test
-    public void transitionStepTransitionTimeShouldBeTwo() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getTransitionTime(), 2, 0);
+    public void transitionStepTransitionTimeShouldBeOne() {
+        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getTransitionTime(), 1, 0);
     }
 
     @Test

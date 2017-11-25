@@ -25,8 +25,8 @@ public class BlinkActionService extends ActionService {
 
         // Transition time calculated from the interval property. Interval represents
         // the whole blink animation so one transition equals to half of the interval's
-        // time.
-        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2;
+        // time minus one (one frame representing the actual color)
+        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2 - 1;
 
         // Construct led mask
         List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
