@@ -34,7 +34,9 @@ public class FrameService {
         int inputMultiplication = calculateInputMultiplication(framesSize, inputSize);
 
         return IntStream.range(0, inputSize * inputMultiplication)
-            .mapToObj(i -> mergeFrames(frames.get(i % framesSize), input.get(i % inputSize)))
+            .mapToObj(i -> mergeFrames(
+                framesSize > 0 ? frames.get(i % framesSize) : new Frame(),
+                input.get(i % inputSize)))
             .collect(Collectors.toList());
     }
 
@@ -51,7 +53,7 @@ public class FrameService {
     }
 
     int calculateInputMultiplication(int framesSize, int inputSize) {
-        if (framesSize == inputSize)
+        if (framesSize == 0 || framesSize == inputSize)
             return 1;
 
         int framesSizeDivided = framesSize;
@@ -121,7 +123,7 @@ public class FrameService {
                     nextLeds.get(i),
                     transitionTime))
             .reduce(
-                IntStream.range(0, currentLeds.size())
+                IntStream.range(0, transitionTime)
                     .mapToObj(i -> new Frame())
                     .collect(Collectors.toList()),
                 this::mergeLedTransitions,

@@ -29,7 +29,7 @@ public class LinearEasingService implements EasingService {
     }
 
     int calculateColor(int currentColor, int nextColor, int step, int segments) {
-        int portion = (nextColor - currentColor) / segments;
-        return currentColor + portion * step;
+        Double result = currentColor + (nextColor - currentColor) / (double) segments * (double) step;
+        return result.intValue();
     }
 }
