@@ -33,6 +33,17 @@ public class LedStripSectionBuilder {
         return this;
     }
 
+    public LedStripSectionBuilder setProperty(String key, Object value) {
+        if (ledStripSection.getProperties() == null) {
+            ledStripSection.setProperties(new HashMap<String, Object>() {{
+                put(key, value);
+            }});
+        } else {
+            ledStripSection.getProperties().put(key, value);
+        }
+        return this;
+    }
+
     public LedStripSection build() {
         return ledStripSection;
     }

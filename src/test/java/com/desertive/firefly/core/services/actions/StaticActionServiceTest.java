@@ -7,15 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
 import com.desertive.firefly.core.data.models.ActionType;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
-import com.desertive.firefly.core.services.actions.ActionService;
-import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 
 public class StaticActionServiceTest {
 
@@ -68,13 +66,9 @@ public class StaticActionServiceTest {
             .setStart(3)
             .setEnd(6)
             .setType(ActionType.STATIC)
-            .setProperties(new HashMap<String, Object>() {{
-                               put("r", 1);
-                               put("g", 1);
-                               put("b", 1);
-                               put("interval", 5);
-                           }}
-            )
+            .setProperty("r", 1)
+            .setProperty("g", 1)
+            .setProperty("b", 1)
             .build();
     }
 
