@@ -7,15 +7,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
+import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
-import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
 import com.desertive.firefly.core.data.models.ActionType;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
-import com.desertive.firefly.core.services.actions.ActionService;
-import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 
 public class BlinkActionServiceTest {
 
@@ -87,13 +85,10 @@ public class BlinkActionServiceTest {
             .setStart(1)
             .setEnd(3)
             .setType(ActionType.BLINK)
-            .setProperties(new HashMap<String, Object>() {{
-                               put("r", 2);
-                               put("g", 2);
-                               put("b", 2);
-                               put("interval", 5);
-                           }}
-            )
+            .setProperty("r", 2)
+            .setProperty("g", 2)
+            .setProperty("b", 2)
+            .setProperty("interval", 5)
             .build();
     }
 }
