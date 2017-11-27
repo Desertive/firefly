@@ -1,5 +1,6 @@
 package com.desertive.firefly.core.data.models.requests;
 
+import java.io.IOException;
 import java.util.HashMap;
 import java.util.List;
 
@@ -9,16 +10,22 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 
 import com.desertive.firefly.core.data.models.ActionType;
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ActionRequest {
+
+    @JsonCreator
+    public static ActionRequest create(String jsonString) throws IOException {
+        return new ObjectMapper().readValue(jsonString, ActionRequest.class);
+    }
 
     @NotNull(message = "There should be sections Array present")
     @Size(min = 1)
     @Valid
     private List<LedStripSection> ledStripSections;
 
-    public ActionRequest() {
-    }
+    public ActionRequest() { }
 
     public List<LedStripSection> getLedStripSections() {
         return ledStripSections;
@@ -38,10 +45,9 @@ public class ActionRequest {
         private Integer end;
         @NotNull(message = "Section should have type of action declared")
         private ActionType type;
-        private HashMap<String, Object> properties;
+        private HashMap<String, Integer> properties;
 
-        public LedStripSection() {
-        }
+        public LedStripSection() { }
 
         public Integer getStart() {
             return start;
@@ -67,11 +73,11 @@ public class ActionRequest {
             this.type = type;
         }
 
-        public HashMap<String, Object> getProperties() {
+        public HashMap<String, Integer> getProperties() {
             return properties;
         }
 
-        public void setProperties(HashMap<String, Object> properties) {
+        public void setProperties(HashMap<String, Integer> properties) {
             this.properties = properties;
         }
 

@@ -1,6 +1,6 @@
 package com.desertive.firefly.core.client;
 
-import java.awt.*;
+import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 

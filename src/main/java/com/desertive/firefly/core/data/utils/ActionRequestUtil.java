@@ -4,7 +4,7 @@ import java.util.HashMap;
 
 public class ActionRequestUtil {
 
-    public static Integer getIntPropertyOrThrow(HashMap<String, Object> properties, String key) {
+    public static Integer getIntPropertyOrThrow(HashMap<String, Integer> properties, String key) {
         if (properties == null) {
             throw new IllegalArgumentException("Section didn't contain properties, although it should");
         } else if (!properties.containsKey(key)) {
