@@ -18,8 +18,7 @@ public class FireflyClientImpl implements FireflyClient {
     TimerManager timerManager;
 
     public void processAndApply(ActionRequest actionRequest) {
-        List<Frame> frames = process(actionRequest);
-        apply(frames);
+        apply(process(actionRequest));
     }
 
     public List<Frame> process(ActionRequest actionRequest) {

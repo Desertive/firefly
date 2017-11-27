@@ -28,27 +28,29 @@ Health check event is purely for testing and debugging purposes.
 The actual event for executing the flow. Action body can have following actions:
 
     {
-	    "ledStripSections": [{
-		    "start": 0, // Starting index of led strip
-		    "end": 3, // Ending index of led strip
-		    "type": "STATIC", // Action type (STATIC, BLINK)
-		    "properties": { // Properties depending of action types
-			    "r": 255,
-			    "g": 255,
-			    "b": 255
-		    }
-	    },
-	    {
-		    "start": 4,
-		    "end": 7,
-		    "type": "BLINK",
-		    "properties": {
-			    "r": 255,
-			    "g": 255,
-			    "b": 255,
-			    "interval": 60 // Value as frames
-		    }
-	    }]
+        "ledStripSections": [
+            {
+                "start": 0, // Starting index of led strip
+                "end": 3, // Ending index of led strip
+                "type": "STATIC", // Action type (STATIC, BLINK)
+                "properties": { // Properties depending of action types
+                    "r": 255,
+                    "g": 255,
+                    "b": 255
+                }
+            },
+            {
+                "start": 4,
+                "end": 7,
+                "type": "BLINK",
+                "properties": {
+                    "r": 255,
+                    "g": 255,
+                    "b": 255,
+                    "interval": 60 // Value as frames
+                }
+            }
+        ]
     }
 
 You can have as many sections as you like. One section might have blue static light, other could have some smooth white blinking etc.
@@ -62,9 +64,9 @@ You can have as many sections as you like. One section might have blue static li
 
 :white_check_mark: Initalization of core structure
 
-:black_square_button: Calculation flow for STATIC action type
+:white_check_mark: Calculation flow for STATIC action type
 
-:black_square_button: Calculation flow for BLINK action type
+:white_check_mark: Calculation flow for BLINK action type
 
 :black_square_button: Timer engine
 

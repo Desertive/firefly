@@ -28,14 +28,14 @@ public class LedStripSectionBuilder {
         return this;
     }
 
-    public LedStripSectionBuilder setProperties(HashMap<String, Object> properties) {
+    public LedStripSectionBuilder setProperties(HashMap<String, Integer> properties) {
         ledStripSection.setProperties(properties);
         return this;
     }
 
-    public LedStripSectionBuilder setProperty(String key, Object value) {
+    public LedStripSectionBuilder setProperty(String key, Integer value) {
         if (ledStripSection.getProperties() == null) {
-            ledStripSection.setProperties(new HashMap<String, Object>() {{
+            ledStripSection.setProperties(new HashMap<String, Integer>() {{
                 put(key, value);
             }});
         } else {

@@ -12,7 +12,7 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
 
-    public Color getColor(HashMap<String, Object> properties) {
+    public Color getColor(HashMap<String, Integer> properties) {
         return new Color(
             ActionRequestUtil.getIntPropertyOrThrow(properties, "r"),
             ActionRequestUtil.getIntPropertyOrThrow(properties, "g"),

@@ -8,6 +8,6 @@ end_of_line = lf
 insert_final_newline = true
 
 # Set default charset and 4 space indentation
-[*.{java,yml}]
+[*.{java,yml,md}]
 indent_style = space
 indent_size = 4
