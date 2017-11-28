@@ -1,6 +1,8 @@
 package com.desertive.firefly.core.client;
 
+import java.awt.Color;
 import java.util.List;
+import java.util.function.Consumer;
 
 import org.springframework.beans.factory.annotation.Autowired;
 
@@ -16,7 +18,15 @@ public class FireflyClientImpl implements FireflyClient {
 
     @Autowired
     TimerManager timerManager;
+    
+    public void start() {
+        timerManager.start();
+    }
 
+    public void stop() {
+        timerManager.stop();
+    }
+    
     public void processAndApply(ActionRequest actionRequest) {
         apply(process(actionRequest));
     }
@@ -27,6 +37,10 @@ public class FireflyClientImpl implements FireflyClient {
 
     public void apply(List<Frame> frames) {
         timerManager.applyState(frames);
+    }
+    
+    public void subscribe(Consumer<List<Color>> method) {
+        timerManager.subscribe(method);
     }
 
 }
