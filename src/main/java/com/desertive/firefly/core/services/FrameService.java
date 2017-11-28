@@ -73,23 +73,17 @@ public class FrameService {
     Frame mergeFrames(Frame frame, Frame input) {
         List<Color> colors = IntStream.range(0, Math.max(input.getLeds().size(), frame.getLeds().size()))
             // If input color is present, return it. Otherwise use existing color
-            .mapToObj(i -> {
-                try {
-                    return getColorOrThrow(input.getLeds(), i);
-                } catch(Exception e) {
-                    return frame.getLeds().get(i);
-                }
-            })
+            .mapToObj(i -> colorExists(input.getLeds(), i) ? input.getLeds().get(i) : frame.getLeds().get(i))
             .collect(Collectors.toList());
         return new Frame(colors);
 
     }
 
-    Color getColorOrThrow(List<Color> colors, int i) throws Exception {
+    boolean colorExists(List<Color> colors, int i) {
         if (colors.size() <= i || colors.get(i) == null) {
-            throw new Exception("Color does not exist");
+            return false;
         }
-        return colors.get(i);
+        return true;
     }
 
     List<Frame> createFrames(TransitionStep current, TransitionStep next) {
