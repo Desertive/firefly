@@ -7,25 +7,29 @@ import org.springframework.context.annotation.Profile;
 
 import com.desertive.firefly.core.client.FireflyClientImpl;
 import com.desertive.firefly.core.services.TimerService;
+import com.desertive.firefly.serialPort.SerialPortService;
 import com.desertive.firefly.server.SocketIOServer;
 import com.desertive.firefly.server.SocketIOServerImpl;
 import com.desertive.firefly.validator.ValidatorFactory;
 
 @Configuration
-@Profile("development")
+@Profile({"development", "release"})
 public class DevelopmentConfiguration {
-
-    @Value("${firefly.server.hostname}")
-    private String hostname;
-
-    @Value("${firefly.server.port}")
-    private Integer port;
 
     @Value("${firefly.core.fps}")
     private Integer fps;
     
     @Value("${firefly.core.heartbeat}")
     private Integer heartbeat;
+
+    @Value("${firefly.serialPort.name}")
+    private String serialPortName;
+    
+    @Value("${firefly.server.hostname}")
+    private String hostname;
+
+    @Value("${firefly.server.port}")
+    private Integer port;
     
     @Bean
     public SocketIOServer SocketIOServer() {
@@ -43,5 +47,10 @@ public class DevelopmentConfiguration {
     @Bean
     public TimerService TimerService() {
         return new TimerService(fps, heartbeat);
+    }
+    
+    @Bean
+    public SerialPortService SerialPortService() {
+        return new SerialPortService(serialPortName);
     }
 }

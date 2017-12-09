@@ -21,7 +21,7 @@ public abstract class ActionService {
 
     public List<Integer> generateLedMask(Integer start, Integer end) {
         return IntStream.rangeClosed(0, end)
-            .map(i -> i >= start ? 1 : 0) // Mask for the led array.
+            .map(i -> i >= start ? 1 : 0) // Mask for the color array.
             // 0 = set null, 1 = set base color
             .boxed()
             .collect(Collectors.toList());

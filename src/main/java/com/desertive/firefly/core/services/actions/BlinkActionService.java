@@ -28,7 +28,7 @@ public class BlinkActionService extends ActionService {
         // time minus one (one frame representing the actual color)
         int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2 - 1;
 
-        // Construct led mask
+        // Construct color mask
         List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
 
         // Construct first array

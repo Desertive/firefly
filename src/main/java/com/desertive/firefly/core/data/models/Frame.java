@@ -9,19 +9,19 @@ public class Frame {
     /*
      * Indicates frame's color state
      */
-    private final List<Color> leds;
+    private final List<Color> colors;
 
 
     public Frame() {
-        this.leds = new ArrayList<>();
+        this.colors = new ArrayList<>();
     }
 
-    public Frame(List<Color> leds) {
-        this.leds = leds;
+    public Frame(List<Color> colors) {
+        this.colors = colors;
     }
 
-    public List<Color> getLeds() {
-        return leds;
+    public List<Color> getColors() {
+        return colors;
     }
 
 }

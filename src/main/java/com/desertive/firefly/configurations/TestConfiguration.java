@@ -22,7 +22,7 @@ public class TestConfiguration {
     
     @Bean
     public SocketIOServer SocketIOServer() {
-        return new SocketIOServerImpl().createServer();
+        return new SocketIOServerImpl().create();
     }
 
     @Bean

@@ -34,7 +34,7 @@ public interface SocketIOServer {
      *
      * @return SocketIOServer
      */
-    SocketIOServerImpl createServer();
+    SocketIOServerImpl create();
 
     /**
      * Starts the socket.io server

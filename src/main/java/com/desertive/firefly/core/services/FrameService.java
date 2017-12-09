@@ -71,9 +71,9 @@ public class FrameService {
     }
 
     Frame mergeFrames(Frame frame, Frame input) {
-        List<Color> colors = IntStream.range(0, Math.max(input.getLeds().size(), frame.getLeds().size()))
+        List<Color> colors = IntStream.range(0, Math.max(input.getColors().size(), frame.getColors().size()))
             // If input color is present, return it. Otherwise use existing color
-            .mapToObj(i -> colorExists(input.getLeds(), i) ? input.getLeds().get(i) : frame.getLeds().get(i))
+            .mapToObj(i -> colorExists(input.getColors(), i) ? input.getColors().get(i) : frame.getColors().get(i))
             .collect(Collectors.toList());
         return new Frame(colors);
 
@@ -89,7 +89,7 @@ public class FrameService {
     List<Frame> createFrames(TransitionStep current, TransitionStep next) {
         // If there are no other steps, only static color is presented
         if (current.equals(next)) {
-            return Arrays.asList(new Frame(current.getLeds()));
+            return Arrays.asList(new Frame(current.getColors()));
         }
 
         final List<Frame> frames = new ArrayList<>();
@@ -98,7 +98,7 @@ public class FrameService {
         if (current.getSleep() > 0) {
             frames.addAll(
                 IntStream.range(0, current.getSleep())
-                    .mapToObj(i -> new Frame(current.getLeds()))
+                    .mapToObj(i -> new Frame(current.getColors()))
                     .collect(Collectors.toList())
             );
         }
@@ -106,8 +106,8 @@ public class FrameService {
         // Add transition frames if requested
         if (current.getTransitionTime() > 0) {
             frames.addAll(createTransitionFrames(
-                current.getLeds(),
-                next.getLeds(),
+                current.getColors(),
+                next.getColors(),
                 current.getTransitionTime(),
                 EasingType.LINEAR) // EasingType hardcoded for now.
                 // In the future it should be possible
@@ -118,28 +118,28 @@ public class FrameService {
         return frames;
     }
 
-    List<Frame> createTransitionFrames(List<Color> currentLeds,
-                                       List<Color> nextLeds,
+    List<Frame> createTransitionFrames(List<Color> currentColors,
+                                       List<Color> nextColors,
                                        int transitionTime,
                                        EasingType easingType) {
         EasingService easingService = easingServiceFactory.getInstance(easingType);
-        return IntStream.range(0, currentLeds.size())
+        return IntStream.range(0, currentColors.size())
             .mapToObj(
                 i -> easingService.easeTransition(
-                    currentLeds.get(i),
-                    nextLeds.get(i),
+                    currentColors.get(i),
+                    nextColors.get(i),
                     transitionTime))
             .reduce(
                 IntStream.range(0, transitionTime)
                     .mapToObj(i -> new Frame())
                     .collect(Collectors.toList()),
-                this::mergeLedTransitions,
+                this::mergeColorTransitions,
                 (a, b) -> a);
     }
 
-    List<Frame> mergeLedTransitions(List<Frame> frames, List<Color> input) {
+    List<Frame> mergeColorTransitions(List<Frame> frames, List<Color> input) {
         IntStream.range(0, input.size())
-            .forEach(i -> frames.get(i).getLeds().add(input.get(i))); // TODO: remove side-effect
+            .forEach(i -> frames.get(i).getColors().add(input.get(i))); // TODO: remove side-effect
         return frames;
     }
 }

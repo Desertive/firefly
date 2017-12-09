@@ -261,7 +261,7 @@ public class FireflyClientTest {
     }
 
     Color getFrameColor(List<Frame> frames, int frameIndex, int colorIndex) {
-        return frames.get(frameIndex).getLeds().get(colorIndex);
+        return frames.get(frameIndex).getColors().get(colorIndex);
     }
 
 }

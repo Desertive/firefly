@@ -23,21 +23,34 @@ firefly:
 spring:
     profiles: development
 firefly:
-    server:
-        hostname: localhost
-        port: 8080
     core:
         fps: 4
         heartbeat: 10000
+    serialPort:
+        name: /dev/ttyUSB0,
+        baudRate: 115200,
+        databits: 8,
+        parity: none
+    server:
+        hostname: localhost
+        port: 8080
         
 ---
 
 spring:
     profiles: release
+logging:
+    level:
+        root: WARN
 firefly:
-    server:
-        hostname: localhost
-        port: 3000
     core:
         fps: 4
         heartbeat: 10000
+    serialPort:
+        name: /dev/ttyUSB0,
+        baudRate: 115200,
+        databits: 8,
+        parity: none
+    server:
+        hostname: localhost
+        port: 3000

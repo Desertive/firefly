@@ -6,7 +6,7 @@ import java.util.List;
 public interface EasingService {
 
     /*
-     * Calculate one LED's transition
+     * Calculate one color's transition
      */
     List<Color> easeTransition(Color current, Color next, int steps);
 

@@ -19,7 +19,7 @@ Run unit tests `./gradlew test`
 Build executable JAR `./gradlew build`
 
 # Socket.io events
-After you have initalized connection to socket.io server, you can call it with events below.
+After you have initialized connection to the socket.io server, you can call it with the events below.
 
 ## HEALTH_CHECK
 Health check event is purely for testing and debugging purposes.
@@ -28,12 +28,15 @@ Health check event is purely for testing and debugging purposes.
 The actual event for executing the flow. Action body can have following actions:
 
     {
+        "runOnce": false, // Optional. Defaults to false.
+                          // true = run animation once and after that keep the last frame's state
+                          // false = loop animation
         "ledStripSections": [
             {
                 "start": 0, // Starting index of led strip
                 "end": 3, // Ending index of led strip
                 "type": "STATIC", // Action type (STATIC, BLINK)
-                "properties": { // Properties depending of action types
+                "properties": { // Properties depending on action types
                     "r": 255,
                     "g": 255,
                     "b": 255

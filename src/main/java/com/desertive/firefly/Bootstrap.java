@@ -10,7 +10,7 @@ import org.springframework.context.annotation.Profile;
 import org.springframework.stereotype.Component;
 
 import com.desertive.firefly.core.client.FireflyClientImpl;
-import com.desertive.firefly.core.services.TimerService;
+import com.desertive.firefly.serialPort.SerialPortService;
 import com.desertive.firefly.server.SocketIOServer;
 
 @Component
@@ -20,22 +20,25 @@ public class Bootstrap {
     private static final Logger LOG = LoggerFactory.getLogger(FireflyApplication.class);
 
     @Autowired
+    SerialPortService serialPortService;
+    
+    @Autowired
     SocketIOServer server;
     
     @Autowired
-    FireflyClientImpl FireflyClient;
+    FireflyClientImpl fireflyClient;
 
     @PostConstruct
     public void start() {
         LOG.info("Starting server");
-        server.createServer().start();
-        FireflyClient.start();
+        server.create().start();
+        fireflyClient.subscribe(serialPortService::send);
     }
 
     @PreDestroy
     public void stop() {
         LOG.info("Stopping server");
-        FireflyClient.stop();
+        fireflyClient.stop();
         server.stop();
     }
 

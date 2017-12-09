@@ -24,6 +24,8 @@ public class ActionRequest {
     @Size(min = 1)
     @Valid
     private List<LedStripSection> ledStripSections;
+    
+    private Boolean runOnce;
 
     public ActionRequest() { }
 
@@ -33,6 +35,14 @@ public class ActionRequest {
 
     public void setLedStripSections(List<LedStripSection> ledStripSections) {
         this.ledStripSections = ledStripSections;
+    }
+
+    public Boolean getRunOnce() {
+        return runOnce;
+    }
+
+    public void setRunOnce(Boolean runOnce) {
+        this.runOnce = runOnce;
     }
 
     public static class LedStripSection {
