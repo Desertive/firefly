@@ -8,10 +8,6 @@ import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
 
 public interface FireflyClient {
-    /**
-     * Start timer engine
-     */
-    void start();
     
     /**
      * Stop timer engine
@@ -31,7 +27,7 @@ public interface FireflyClient {
     /**
      * Pass frames for timer engine
      */
-    void apply(List<Frame> frames);
+    void apply(List<Frame> frames, Boolean runOnce);
     
     /**
      * Register a callable method for events.

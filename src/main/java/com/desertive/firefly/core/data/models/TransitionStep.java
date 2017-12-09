@@ -8,7 +8,7 @@ public class TransitionStep {
     /*
      * Indicates step's color state
      */
-    private final List<Color> leds;
+    private final List<Color> colors;
     /*
      * Indicates how many frames it should take to make the transition to the next step
      */
@@ -18,29 +18,29 @@ public class TransitionStep {
      */
     private final int sleep;
 
-    public TransitionStep(List<Color> leds) {
-        this.leds = leds;
+    public TransitionStep(List<Color> colors) {
+        this.colors = colors;
         this.transitionTime = 0;
         this.sleep = 1;
     }
 
-    public TransitionStep(List<Color> leds,
+    public TransitionStep(List<Color> colors,
                           Integer transitionTime) {
-        this.leds = leds;
+        this.colors = colors;
         this.transitionTime = transitionTime;
         this.sleep = 1;
     }
 
-    public TransitionStep(List<Color> leds,
+    public TransitionStep(List<Color> colors,
                           Integer transitionTime,
                           Integer sleep) {
-        this.leds = leds;
+        this.colors = colors;
         this.transitionTime = transitionTime;
         this.sleep = sleep;
     }
 
-    public List<Color> getLeds() {
-        return leds;
+    public List<Color> getColors() {
+        return colors;
     }
 
     public int getTransitionTime() {

@@ -18,25 +18,21 @@ public class FireflyClientImpl implements FireflyClient {
 
     @Autowired
     TimerManager timerManager;
-    
-    public void start() {
-        timerManager.start();
-    }
 
     public void stop() {
         timerManager.stop();
     }
     
     public void processAndApply(ActionRequest actionRequest) {
-        apply(process(actionRequest));
+        apply(process(actionRequest), actionRequest.getRunOnce());
     }
 
     public List<Frame> process(ActionRequest actionRequest) {
         return calculationManager.processActionRequest(actionRequest);
     }
 
-    public void apply(List<Frame> frames) {
-        timerManager.applyState(frames);
+    public void apply(List<Frame> frames, Boolean runOnce) {
+        timerManager.applyState(frames, runOnce);
     }
     
     public void subscribe(Consumer<List<Color>> method) {

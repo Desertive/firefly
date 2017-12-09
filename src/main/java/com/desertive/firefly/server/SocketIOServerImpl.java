@@ -77,7 +77,7 @@ public class SocketIOServerImpl implements SocketIOServer {
         });
     }
 
-    public SocketIOServerImpl createServer() {
+    public SocketIOServerImpl create() {
         server = new com.corundumstudio.socketio.SocketIOServer(config);
         return this;
     }

@@ -3,7 +3,6 @@ package com.desertive.firefly.core.services.actions;
 import static org.junit.Assert.assertEquals;
 
 import java.awt.Color;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,7 +45,7 @@ public class StaticActionServiceTest {
     public void transitionStepLedListShouldContainThreeNullsAndFourColors() {
         List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(ledStripSection);
 
-        List<Color> colors = transitionSteps.get(0).getLeds();
+        List<Color> colors = transitionSteps.get(0).getColors();
 
         List<Color> nullColors = colors
             .stream()

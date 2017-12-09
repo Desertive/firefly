@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.desertive.firefly.core.services.FrameService;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +16,6 @@ import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 
 @Service
 public class CalculationManager {
-
-    private static final Logger LOG = LoggerFactory.getLogger(CalculationManager.class);
 
     @Autowired
     FrameService frameService;
