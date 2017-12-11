@@ -49,7 +49,7 @@ public class ActionRequest {
     public static class Options {
 
         private boolean resetAnimation = false;
-        private boolean resetState = false;
+        private boolean resetColors = false;
         private boolean runOnce = false;
 
         public boolean getResetAnimation() {
@@ -60,12 +60,12 @@ public class ActionRequest {
             this.resetAnimation = Boolean.TRUE.equals(resetAnimation);
         }
 
-        public boolean getResetState() {
-            return resetState;
+        public boolean getResetColors() {
+            return resetColors;
         }
 
-        public void setResetState(Boolean resetState) {
-            this.resetState = Boolean.TRUE.equals(resetState);
+        public void setResetColors(Boolean resetColors) {
+            this.resetColors = Boolean.TRUE.equals(resetColors);
         }
 
         public boolean getRunOnce() {
