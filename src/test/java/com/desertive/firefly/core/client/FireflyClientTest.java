@@ -16,7 +16,7 @@ import org.springframework.test.context.ActiveProfiles;
 import com.desertive.firefly.core.data.models.ActionType;
 import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 import org.springframework.test.context.junit4.rules.SpringClassRule;
 import org.springframework.test.context.junit4.rules.SpringMethodRule;
 
@@ -254,9 +254,9 @@ public class FireflyClientTest {
      *     Helpers     *
      * * * * * * * * * */
 
-    ActionRequest request(List<LedStripSection> ledStripSections) {
+    ActionRequest request(List<Section> ledStripSections) {
         ActionRequest actionRequest = new ActionRequest();
-        actionRequest.setLedStripSections(ledStripSections);
+        actionRequest.setSections(ledStripSections);
         return actionRequest;
     }
 

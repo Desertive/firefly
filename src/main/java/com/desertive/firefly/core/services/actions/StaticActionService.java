@@ -6,14 +6,14 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.desertive.firefly.core.data.models.TransitionStep;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 
 public class StaticActionService extends ActionService {
 
     /*
      * Static action presents only one static color without animation
      */
-    public List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection) {
+    public List<TransitionStep> generateTransitionSteps(Section ledStripSection) {
         // Get base color
         Color baseColor = super.getColor(ledStripSection.getProperties());
 

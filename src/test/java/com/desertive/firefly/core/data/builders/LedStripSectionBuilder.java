@@ -3,14 +3,14 @@ package com.desertive.firefly.core.data.builders;
 import java.util.HashMap;
 
 import com.desertive.firefly.core.data.models.ActionType;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 
 public class LedStripSectionBuilder {
 
-    LedStripSection ledStripSection;
+    Section ledStripSection;
 
     public LedStripSectionBuilder() {
-        ledStripSection = new LedStripSection();
+        ledStripSection = new Section();
     }
 
     public LedStripSectionBuilder setStart(Integer start) {
@@ -44,7 +44,7 @@ public class LedStripSectionBuilder {
         return this;
     }
 
-    public LedStripSection build() {
+    public Section build() {
         return ledStripSection;
     }
 

@@ -8,6 +8,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 
 import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Options;
 import com.desertive.firefly.core.managers.CalculationManager;
 import com.desertive.firefly.core.managers.TimerManager;
 
@@ -24,17 +25,17 @@ public class FireflyClientImpl implements FireflyClient {
     }
     
     public void processAndApply(ActionRequest actionRequest) {
-        apply(process(actionRequest), actionRequest.getRunOnce());
+        apply(process(actionRequest), actionRequest.getOptions());
     }
 
     public List<Frame> process(ActionRequest actionRequest) {
         return calculationManager.processActionRequest(actionRequest);
     }
 
-    public void apply(List<Frame> frames, Boolean runOnce) {
-        timerManager.applyState(frames, runOnce);
+    public void apply(List<Frame> frames, Options options) {
+        timerManager.applyState(frames, options);
     }
-    
+
     public void subscribe(Consumer<List<Color>> method) {
         timerManager.subscribe(method);
     }

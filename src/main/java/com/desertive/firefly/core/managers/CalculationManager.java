@@ -10,7 +10,7 @@ import org.springframework.stereotype.Service;
 import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 import com.desertive.firefly.core.services.actions.ActionService;
 import com.desertive.firefly.core.services.actions.ActionServiceFactory;
 
@@ -27,13 +27,13 @@ public class CalculationManager {
     }
 
     public List<Frame> processActionRequest(ActionRequest actionRequest) {
-        return actionRequest.getLedStripSections().stream()
+        return actionRequest.getSections().stream()
             .map(this::convertSectionsIntoSteps) // 1. Convert each section into list of transition steps
             .map(frameService::convertStepsIntoFrames) // 2. Convert each transition step list into list of frames
             .reduce(new ArrayList<>(), frameService::mergeFrameLists); // 3. Merge frame lists
     }
 
-    List<TransitionStep> convertSectionsIntoSteps(LedStripSection ledStripSection) {
+    List<TransitionStep> convertSectionsIntoSteps(Section ledStripSection) {
         ActionService actionService = actionServiceFactory.getInstance(ledStripSection.getType());
         return actionService.generateTransitionSteps(ledStripSection);
     }

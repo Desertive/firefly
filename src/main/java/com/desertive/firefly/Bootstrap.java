@@ -30,15 +30,19 @@ public class Bootstrap {
 
     @PostConstruct
     public void start() {
-        LOG.info("Starting server");
+        LOG.info("Starting socket.io server");
         server.create().start();
-        fireflyClient.subscribe(serialPortService::send);
+        
+        LOG.info("Subscribing serialport to timer engine");
+        fireflyClient.subscribe(serialPortService::write);
     }
 
     @PreDestroy
     public void stop() {
-        LOG.info("Stopping server");
+        LOG.info("Stop timer engine");
         fireflyClient.stop();
+        
+        LOG.info("Stop socket.io server");
         server.stop();
     }
 
