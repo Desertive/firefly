@@ -6,7 +6,7 @@ spring:
     application:
         name: Firefly
     profiles:
-        active: development
+        active: release
         
 ---
 
@@ -25,12 +25,9 @@ spring:
 firefly:
     core:
         fps: 4
-        heartbeat: 10000
+        heartbeat: 2000
     serialPort:
-        name: /dev/ttyUSB0,
-        baudRate: 115200,
-        databits: 8,
-        parity: none
+        name: /dev/ttyUSB0
     server:
         hostname: localhost
         port: 8080
@@ -39,18 +36,12 @@ firefly:
 
 spring:
     profiles: release
-logging:
-    level:
-        root: WARN
 firefly:
     core:
-        fps: 4
-        heartbeat: 10000
+        fps: 20
+        heartbeat: 14000
     serialPort:
-        name: /dev/ttyUSB0,
-        baudRate: 115200,
-        databits: 8,
-        parity: none
+        name: /dev/ttyUSB0
     server:
         hostname: localhost
         port: 3000

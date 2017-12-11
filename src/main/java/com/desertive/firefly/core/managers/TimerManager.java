@@ -10,6 +10,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.desertive.firefly.core.data.models.Frame;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Options;
 import com.desertive.firefly.core.services.TimerService;
 import com.desertive.firefly.core.timer.state.TimerState;
 
@@ -29,9 +30,9 @@ public class TimerManager {
     
     List<Consumer<List<Color>>> subscriptions;
 
-    public void applyState(List<Frame> frames, Boolean runOnce) {
+    public void applyState(List<Frame> frames, Options options) {
         LOG.info(String.format("Setting a new state with %d frames",frames.size()));
-        state.setFrames(frames, false);
+        state.setFrames(frames, options);
         timerService.applyTimer(frames.size() > 1);
     }
 

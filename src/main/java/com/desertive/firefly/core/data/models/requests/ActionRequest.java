@@ -23,29 +23,63 @@ public class ActionRequest {
     @NotNull(message = "There should be sections Array present")
     @Size(min = 1)
     @Valid
-    private List<LedStripSection> ledStripSections;
-    
-    private Boolean runOnce;
+    private List<Section> sections;
 
-    public ActionRequest() { }
+    private Options options = new Options();
 
-    public List<LedStripSection> getLedStripSections() {
-        return ledStripSections;
+    public ActionRequest() {
     }
 
-    public void setLedStripSections(List<LedStripSection> ledStripSections) {
-        this.ledStripSections = ledStripSections;
+    public List<Section> getSections() {
+        return sections;
     }
 
-    public Boolean getRunOnce() {
-        return runOnce;
+    public void setSections(List<Section> sections) {
+        this.sections = sections;
     }
 
-    public void setRunOnce(Boolean runOnce) {
-        this.runOnce = runOnce;
+    public Options getOptions() {
+        return options;
     }
 
-    public static class LedStripSection {
+    public void setOptions(Options options) {
+        this.options = options != null ? options : new Options();
+    }
+
+    public static class Options {
+
+        private boolean resetAnimation = false;
+        private boolean resetState = false;
+        private boolean runOnce = false;
+
+        public boolean getResetAnimation() {
+            return resetAnimation;
+        }
+
+        public void setResetAnimation(Boolean resetAnimation) {
+            this.resetAnimation = Boolean.TRUE.equals(resetAnimation);
+        }
+
+        public boolean getResetState() {
+            return resetState;
+        }
+
+        public void setResetState(Boolean resetState) {
+            this.resetState = Boolean.TRUE.equals(resetState);
+        }
+
+        public boolean getRunOnce() {
+            return runOnce;
+        }
+
+        public void setRunOnce(Boolean runOnce) {
+            this.runOnce = Boolean.TRUE.equals(runOnce);
+            this.resetAnimation = Boolean.TRUE.equals(runOnce) == true ? true : this.resetAnimation;
+        }
+
+    }
+
+    public static class Section {
 
         @NotNull(message = "Section should have starting point")
         @Min(0)
@@ -57,7 +91,8 @@ public class ActionRequest {
         private ActionType type;
         private HashMap<String, Integer> properties;
 
-        public LedStripSection() { }
+        public Section() {
+        }
 
         public Integer getStart() {
             return start;

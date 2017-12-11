@@ -3,6 +3,7 @@ package com.desertive.firefly.core.services;
 import com.desertive.firefly.core.data.models.EasingType;
 import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.TransitionStep;
+import com.desertive.firefly.core.data.utils.ColorUtil;
 import com.desertive.firefly.core.services.easings.EasingService;
 import com.desertive.firefly.core.services.easings.EasingServiceFactory;
 import org.springframework.stereotype.Service;
@@ -72,20 +73,14 @@ public class FrameService {
 
     Frame mergeFrames(Frame frame, Frame input) {
         List<Color> colors = IntStream.range(0, Math.max(input.getColors().size(), frame.getColors().size()))
-            // If input color is present, return it. Otherwise use existing color
-            .mapToObj(i -> colorExists(input.getColors(), i) ? input.getColors().get(i) : frame.getColors().get(i))
+            .mapToObj(i -> ColorUtil.colorExists(input.getColors(), i) ? input.getColors().get(i) : // If input color is present, return it.
+                ColorUtil.colorExists(frame.getColors(), i) ? frame.getColors().get(i) : // Else if existing color is present, return it.
+                    null) // Else return null
             .collect(Collectors.toList());
         return new Frame(colors);
 
     }
-
-    boolean colorExists(List<Color> colors, int i) {
-        if (colors.size() <= i || colors.get(i) == null) {
-            return false;
-        }
-        return true;
-    }
-
+    
     List<Frame> createFrames(TransitionStep current, TransitionStep next) {
         // If there are no other steps, only static color is presented
         if (current.equals(next)) {

@@ -28,10 +28,19 @@ Health check event is purely for testing and debugging purposes.
 The actual event for executing the flow. Action body can have following actions:
 
     {
-        "runOnce": false, // Optional. Defaults to false.
-                          // true = run animation once and after that keep the last frame's state
-                          // false = loop animation
-        "ledStripSections": [
+        "options": { // Optional section. You can set the desired options or leave them as they are.
+            "resetAnimation": false, // Defaults to false.
+                                     // true = Starts the frame loop from index zero
+                                     // false = Continues the frame loop from the previous index number
+            "resetColors": false, // Defaults to false.
+                                  // true = Reset current color state so that null colors are presented as blacks
+                                  // false = If there are null colors, use pervious frame's colors in those indexes
+            "runOnce": false, // Defaults to false.
+                              // true = Run animation once and after that keep the last frame's state
+                              // false = Loop animation
+                              // If set to true, resetAnimation will also be automatically set to true
+        }
+        "sections": [
             {
                 "start": 0, // Starting index of led strip
                 "end": 3, // Ending index of led strip
@@ -71,9 +80,9 @@ You can have as many sections as you like. One section might have blue static li
 
 :white_check_mark: Calculation flow for BLINK action type
 
-:black_square_button: Timer engine
+:white_check_mark: Timer engine
 
-:black_square_button: Response stream for receivers
+:white_check_mark: Response stream for receivers
 
 # Kudos
 - Image design by [Flaticon](https://www.flaticon.com/)

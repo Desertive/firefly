@@ -6,14 +6,15 @@ import java.util.function.Consumer;
 
 import com.desertive.firefly.core.data.models.Frame;
 import com.desertive.firefly.core.data.models.requests.ActionRequest;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Options;
 
 public interface FireflyClient {
-    
+
     /**
      * Stop timer engine
      */
     void stop();
-    
+
     /**
      * Default method for processing request and passing the result to timer engine
      */
@@ -27,13 +28,13 @@ public interface FireflyClient {
     /**
      * Pass frames for timer engine
      */
-    void apply(List<Frame> frames, Boolean runOnce);
-    
+    void apply(List<Frame> frames, Options options);
+
     /**
      * Register a callable method for events.
      * 
-     * Whenever the timer engine fires a color notify, 
-     * the registered method will be called with a list of colors.
+     * Whenever the timer engine fires a color notify, the registered method will be
+     * called with a list of colors.
      */
     void subscribe(Consumer<List<Color>> method);
 

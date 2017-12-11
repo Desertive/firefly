@@ -14,7 +14,7 @@ import com.desertive.firefly.validator.ValidatorFactory;
 
 @Configuration
 @Profile({"development", "release"})
-public class DevelopmentConfiguration {
+public class DefaultConfiguration {
 
     @Value("${firefly.core.fps}")
     private Integer fps;

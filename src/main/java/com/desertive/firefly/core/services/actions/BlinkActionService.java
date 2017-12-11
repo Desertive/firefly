@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 import com.desertive.firefly.core.data.models.TransitionStep;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public class BlinkActionService extends ActionService {
@@ -16,7 +16,7 @@ public class BlinkActionService extends ActionService {
 	 * effect could be created between multiple colors.
 	 */
 
-    public List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection) {
+    public List<TransitionStep> generateTransitionSteps(Section ledStripSection) {
         // Black
         Color blackColor = new Color(0, 0, 0);
 

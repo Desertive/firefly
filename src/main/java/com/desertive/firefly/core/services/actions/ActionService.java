@@ -7,7 +7,7 @@ import java.util.stream.Collectors;
 import java.util.stream.IntStream;
 
 import com.desertive.firefly.core.data.models.TransitionStep;
-import com.desertive.firefly.core.data.models.requests.ActionRequest.LedStripSection;
+import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
@@ -27,6 +27,6 @@ public abstract class ActionService {
             .collect(Collectors.toList());
     }
 
-    public abstract List<TransitionStep> generateTransitionSteps(LedStripSection ledStripSection);
+    public abstract List<TransitionStep> generateTransitionSteps(Section ledStripSection);
 
 }
