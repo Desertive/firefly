@@ -2,6 +2,7 @@ package com.desertive.firefly.core.timer.state;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.function.Consumer;
 
@@ -35,8 +36,10 @@ public class TimerState {
     }
 
     public void setFrames(List<Frame> frames, Options options) {
-        index = options.getResetAnimation() ? -1 : this.index;
-        currentFrame = options.getResetState() ? new Frame() : this.currentFrame;
+        index = options.getResetAnimation() ? -1 : index;
+        currentFrame = options.getResetColors() ? 
+                new Frame(Collections.nCopies(currentFrame.getColors().size(), null)) : // Keep color list size
+                currentFrame;
         runOnce = options.getRunOnce();
         this.frames = frames;
     }
