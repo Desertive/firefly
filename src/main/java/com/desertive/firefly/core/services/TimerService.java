@@ -41,15 +41,14 @@ public class TimerService {
         }
         
         IntStream.range(0, timerThreads)
-            .forEach(i -> {
-                System.out.println(interval * i);
+            .forEach(i -> 
                 futureTask.add(i, 
                         executor.scheduleAtFixedRate(
                                 new FrameTask(), 
                                 interval * i, 
                                 interval * timerThreads, 
-                                TimeUnit.MILLISECONDS));
-            });
+                                TimeUnit.MILLISECONDS))
+            );
     }
 
     public void stop() {
