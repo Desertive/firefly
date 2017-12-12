@@ -9,6 +9,7 @@ import com.desertive.firefly.core.services.easings.EasingServiceFactory;
 import org.springframework.stereotype.Service;
 
 import java.awt.Color;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -54,21 +55,8 @@ public class FrameService {
     }
 
     int calculateInputMultiplication(int framesSize, int inputSize) {
-        if (framesSize == 0 || framesSize == inputSize)
-            return 1;
-
-        int framesSizeDivided = framesSize;
-        int inputSizeDivided = inputSize;
-        while (true) {
-            if (framesSizeDivided % 2 == 0 && inputSizeDivided % 2 == 0) {
-                framesSizeDivided /= 2;
-                inputSizeDivided /= 2;
-            } else {
-                break;
-            }
-        }
-
-        return framesSizeDivided;
+        return framesSize > 1 ? // If framesSize is over one, calculate input multiplication. Otherwise return one.
+            framesSize / BigInteger.valueOf(inputSize).gcd(BigInteger.valueOf(framesSize)).intValue() : 1;
     }
 
     Frame mergeFrames(Frame frame, Frame input) {
