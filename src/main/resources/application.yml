@@ -17,6 +17,7 @@ firefly:
         fps: 2 # Frames per second
         heartbeat: 10000 # If there is only one frame to show, 
                          # in what interval (in milliseconds) we will resend it to receivers
+        timerThreads: 1 # How many threads we use with timer
         
 ---
 
@@ -26,6 +27,7 @@ firefly:
     core:
         fps: 4
         heartbeat: 2000
+        timerThreads: 1
     serialPort:
         name: /dev/ttyUSB0
     server:
@@ -40,6 +42,7 @@ firefly:
     core:
         fps: 20
         heartbeat: 14000
+        timerThreads: 4
     serialPort:
         name: /dev/ttyUSB0
     server:
