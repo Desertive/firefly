@@ -19,6 +19,9 @@ public class TestConfiguration {
 
     @Value("${firefly.core.heartbeat}")
     private Integer heartbeat;
+
+    @Value("${firefly.core.timerThreads}")
+    private Integer timerThreads;
     
     @Bean
     public SocketIOServer SocketIOServer() {
@@ -32,7 +35,7 @@ public class TestConfiguration {
 
     @Bean
     public TimerService TimerService() {
-        return new TimerService(fps, heartbeat);
+        return new TimerService(fps, heartbeat, timerThreads);
     }
 
 }

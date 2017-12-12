@@ -22,6 +22,9 @@ public class DefaultConfiguration {
     @Value("${firefly.core.heartbeat}")
     private Integer heartbeat;
 
+    @Value("${firefly.core.timerThreads}")
+    private Integer timerThreads;
+
     @Value("${firefly.serialPort.name}")
     private String serialPortName;
     
@@ -46,7 +49,7 @@ public class DefaultConfiguration {
     
     @Bean
     public TimerService TimerService() {
-        return new TimerService(fps, heartbeat);
+        return new TimerService(fps, heartbeat, timerThreads);
     }
     
     @Bean
