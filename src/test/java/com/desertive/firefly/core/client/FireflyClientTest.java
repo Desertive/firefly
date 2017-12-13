@@ -141,6 +141,42 @@ public class FireflyClientTest {
                     .equals(new Color(25, 12, 50)));
 
             });
+            
+            it("should return blink animation with multiple colors", () -> {
+                
+                List<Frame> frames = fireflyClient.process(request(Arrays.asList(
+                        new SectionBuilder()
+                            .setStart(0)
+                            .setEnd(0)
+                            .setType(ActionType.BLINK)
+                            .addColor(100, 100, 100)
+                            .addColor(140, 140, 140)
+                            .addColor(160, 120, 100)
+                            .addColor(0, 0, 0)
+                            .addProperty("interval", 8)
+                            .build()
+                        )
+                    ));
+
+                    assertEquals(frames.size(), 8);
+                    assertTrue(getFrameColor(frames, 0, 0)
+                        .equals(new Color(100, 100, 100)));
+                    assertTrue(getFrameColor(frames, 1, 0)
+                        .equals(new Color(120, 120, 120)));
+                    assertTrue(getFrameColor(frames, 2, 0)
+                        .equals(new Color(140, 140, 140)));
+                    assertTrue(getFrameColor(frames, 3, 0)
+                        .equals(new Color(150, 130, 120)));
+                    assertTrue(getFrameColor(frames, 4, 0)
+                        .equals(new Color(160, 120, 100)));
+                    assertTrue(getFrameColor(frames, 5, 0)
+                        .equals(new Color(80, 60, 50)));
+                    assertTrue(getFrameColor(frames, 6, 0)
+                        .equals(new Color(0, 0, 0)));
+                    assertTrue(getFrameColor(frames, 7, 0)
+                        .equals(new Color(50, 50, 50)));
+                
+            });
 
             it("should return blink animation with multiple sections", () -> {
 

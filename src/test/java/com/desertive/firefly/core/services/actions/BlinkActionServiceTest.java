@@ -18,32 +18,30 @@ public class BlinkActionServiceTest {
 
     ActionServiceFactory actionServiceFactory = new ActionServiceFactory();
     ActionService actionService;
-    Section section;
 
     @Before
     public void initalizeTestEnvironment() {
         actionService = actionServiceFactory.getInstance(ActionType.BLINK);
-        section = buildSection();
     }
 
     @Test
     public void itShouldReturnTwoTransitionSteps() {
-        assertEquals(actionService.generateTransitionSteps(section).size(), 2);
+        assertEquals(actionService.generateTransitionSteps(buildSection()).size(), 2);
     }
 
     @Test
     public void transitionStepSleepShouldBeOne() {
-        assertEquals(actionService.generateTransitionSteps(section).get(0).getSleep(), 1);
+        assertEquals(actionService.generateTransitionSteps(buildSection()).get(0).getSleep(), 1);
     }
 
     @Test
     public void transitionStepTransitionTimeShouldBeOne() {
-        assertEquals(actionService.generateTransitionSteps(section).get(0).getTransitionTime(), 1, 0);
+        assertEquals(actionService.generateTransitionSteps(buildSection()).get(0).getTransitionTime(), 1, 0);
     }
 
     @Test
     public void firstTransitionStepLedListShouldContainOneNullAndThreeBlackColors() {
-        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(section);
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSection());
 
         List<Color> colors = transitionSteps.get(0).getColors();
 
@@ -59,10 +57,10 @@ public class BlinkActionServiceTest {
             .collect(Collectors.toList());
         assertEquals(containsColor.size(), 3);
     }
-
+    
     @Test
     public void secondTransitionStepLedListShouldContainOneNullAndThreeBaseColors() {
-        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(section);
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSection());
 
         List<Color> colors = transitionSteps.get(1).getColors();
 
@@ -79,6 +77,13 @@ public class BlinkActionServiceTest {
         assertEquals(containsColor.size(), 3);
     }
 
+    @Test
+    public void multiColorRequestShouldReturnFiveTransitionSteps() {
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSectionWithFiveColors());
+
+        assertEquals(transitionSteps.size(), 5);
+    }
+
     private Section buildSection() {
         return new SectionBuilder()
             .setStart(1)
@@ -86,6 +91,20 @@ public class BlinkActionServiceTest {
             .setType(ActionType.BLINK)
             .addColor(2, 2, 2)
             .addProperty("interval", 5)
+            .build();
+    }
+    
+    private Section buildSectionWithFiveColors() {
+        return new SectionBuilder()
+            .setStart(1)
+            .setEnd(3)
+            .setType(ActionType.BLINK)
+            .addColor(2, 2, 2)
+            .addColor(10, 10, 10)
+            .addColor(0, 0, 0)
+            .addColor(14, 14, 14)
+            .addColor(10, 10, 10)
+            .addProperty("interval", 4)
             .build();
     }
 }
