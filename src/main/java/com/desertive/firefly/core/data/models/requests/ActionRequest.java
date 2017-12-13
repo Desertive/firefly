@@ -1,6 +1,7 @@
 package com.desertive.firefly.core.data.models.requests;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -11,16 +12,18 @@ import javax.validation.constraints.Size;
 
 import com.desertive.firefly.core.data.models.ActionType;
 import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 public class ActionRequest {
 
     @JsonCreator
     public static ActionRequest create(String jsonString) throws IOException {
-        return new ObjectMapper().readValue(jsonString, ActionRequest.class);
+        return new ObjectMapper()
+                .readValue(jsonString, ActionRequest.class);
     }
 
-    @NotNull(message = "There should be sections Array present")
+    @NotNull(message = "There should be sections array present")
     @Size(min = 1)
     @Valid
     private List<Section> sections;
@@ -87,10 +90,13 @@ public class ActionRequest {
         @NotNull(message = "Section should have ending point")
         @Min(0)
         private Integer end;
+        @NotNull(message = "Section should have at least one color")
+        @Size(min = 1)
+        private List<HashMap<Character, Integer>> colors;
         @NotNull(message = "Section should have type of action declared")
         private ActionType type;
         private HashMap<String, Integer> properties;
-
+        
         public Section() {
         }
 
@@ -108,6 +114,20 @@ public class ActionRequest {
 
         public void setEnd(Integer end) {
             this.end = end;
+        }
+
+        public List<HashMap<Character, Integer>> getColors() {
+            return colors;
+        }
+
+        public void setColors(List<HashMap<Character, Integer>> colors) {
+            this.colors = colors;
+        }
+        
+        public void setColor(HashMap<Character, Integer> color) {
+            this.colors = new ArrayList<HashMap<Character, Integer>>() {{
+                add(color);
+            }};
         }
 
         public ActionType getType() {

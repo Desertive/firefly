@@ -16,20 +16,20 @@ public class BlinkActionService extends ActionService {
 	 * effect could be created between multiple colors.
 	 */
 
-    public List<TransitionStep> generateTransitionSteps(Section ledStripSection) {
+    public List<TransitionStep> generateTransitionSteps(Section section) {
         // Black
         Color blackColor = new Color(0, 0, 0);
 
         // Get base color
-        Color baseColor = super.getColor(ledStripSection.getProperties());
+        Color baseColor = super.getColor(section.getColors().get(0));
 
         // Transition time calculated from the interval property. Interval represents
         // the whole blink animation so one transition equals to half of the interval's
         // time minus one (one frame representing the actual color)
-        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(ledStripSection.getProperties(), "interval") / 2 - 1;
+        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "interval") / 2 - 1;
 
         // Construct color mask
-        List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
+        List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());
 
         // Construct first array
         List<Color> blackColorList = mask.stream()

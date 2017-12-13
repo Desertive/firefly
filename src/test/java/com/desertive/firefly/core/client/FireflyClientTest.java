@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.util.Arrays;
 import java.util.List;
 
-import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
+import com.desertive.firefly.core.data.builders.SectionBuilder;
 import com.greghaskins.spectrum.Spectrum;
 import org.junit.ClassRule;
 import org.junit.Rule;
@@ -53,13 +53,11 @@ public class FireflyClientTest {
             it("should return one frame", () -> {
 
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(0)
                         .setEnd(3)
                         .setType(ActionType.STATIC)
-                        .setProperty("r", 100)
-                        .setProperty("g", 200)
-                        .setProperty("b", 150)
+                        .addColor(100, 200, 150)
                         .build()
                     )
                 ));
@@ -71,29 +69,23 @@ public class FireflyClientTest {
             it("should return different colors for different sections", () -> {
 
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(0)
                         .setEnd(1)
                         .setType(ActionType.STATIC)
-                        .setProperty("r", 242)
-                        .setProperty("g", 194)
-                        .setProperty("b", 8)
+                        .addColor(242, 194, 8)
                         .build(),
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(2)
                         .setEnd(5)
                         .setType(ActionType.STATIC)
-                        .setProperty("r", 51)
-                        .setProperty("g", 46)
-                        .setProperty("b", 64)
+                        .addColor(51, 46, 64)
                         .build(),
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(6)
                         .setEnd(11)
                         .setType(ActionType.STATIC)
-                        .setProperty("r", 1)
-                        .setProperty("g", 218)
-                        .setProperty("b", 53)
+                        .addColor(1, 218, 53)
                         .build()
                     )
                 ));
@@ -120,14 +112,12 @@ public class FireflyClientTest {
             it("should return blink animation with one section", () -> {
 
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(0)
                         .setEnd(0)
                         .setType(ActionType.BLINK)
-                        .setProperty("r", 100)
-                        .setProperty("g", 50)
-                        .setProperty("b", 200)
-                        .setProperty("interval", 8)
+                        .addColor(100, 50, 200)
+                        .addProperty("interval", 8)
                         .build()
                     )
                 ));
@@ -155,23 +145,19 @@ public class FireflyClientTest {
             it("should return blink animation with multiple sections", () -> {
 
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(0)
                         .setEnd(0)
                         .setType(ActionType.BLINK)
-                        .setProperty("r", 100)
-                        .setProperty("g", 100)
-                        .setProperty("b", 100)
-                        .setProperty("interval", 4)
+                        .addColor(100, 100, 100)
+                        .addProperty("interval", 4)
                         .build(),
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(1)
                         .setEnd(1)
                         .setType(ActionType.BLINK)
-                        .setProperty("r", 200)
-                        .setProperty("g", 200)
-                        .setProperty("b", 200)
-                        .setProperty("interval", 2)
+                        .addColor(200, 200, 200)
+                        .addProperty("interval", 2)
                         .build()
                     )
                 ));
@@ -205,22 +191,18 @@ public class FireflyClientTest {
             it("should return correct frames with blink and static types combined", () -> {
 
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(0)
                         .setEnd(0)
                         .setType(ActionType.BLINK)
-                        .setProperty("r", 100)
-                        .setProperty("g", 100)
-                        .setProperty("b", 100)
-                        .setProperty("interval", 4)
+                        .addColor(100, 100, 100)
+                        .addProperty("interval", 4)
                         .build(),
-                    new LedStripSectionBuilder()
+                    new SectionBuilder()
                         .setStart(1)
                         .setEnd(1)
                         .setType(ActionType.STATIC)
-                        .setProperty("r", 200)
-                        .setProperty("g", 200)
-                        .setProperty("b", 200)
+                        .addColor(200, 200, 200)
                         .build()
                     )
                 ));
@@ -254,9 +236,9 @@ public class FireflyClientTest {
      *     Helpers     *
      * * * * * * * * * */
 
-    ActionRequest request(List<Section> ledStripSections) {
+    ActionRequest request(List<Section> sections) {
         ActionRequest actionRequest = new ActionRequest();
-        actionRequest.setSections(ledStripSections);
+        actionRequest.setSections(sections);
         return actionRequest;
     }
 
