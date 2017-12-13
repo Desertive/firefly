@@ -55,11 +55,23 @@ The actual event for executing the flow. Action body can have following actions:
                 "start": 4,
                 "end": 7,
                 "type": "BLINK",
-                "color": {
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                },
+                "colors": [ // Colors which are presented in blink animation
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255
+                    },
+                    {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    },
+                    {
+                        "r": 120,
+                        "g": 60,
+                        "b": 200
+                    }
+                ],
                 "properties": { // Properties depending on action types
                     "interval": 60 // Value as frames
                 }

@@ -1,9 +1,11 @@
 package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
@@ -17,34 +19,34 @@ public class BlinkActionService extends ActionService {
 	 */
 
     public List<TransitionStep> generateTransitionSteps(Section section) {
-        // Black
-        Color blackColor = new Color(0, 0, 0);
+        List<Color> colors;
+        
+        if (section.getColors().size() == 1) {
+            colors = new ArrayList<Color>() {{
+                add(new Color(0, 0, 0));
+                add(getColor(section.getColors().get(0)));
+            }};
+        } else {
+            colors = IntStream.range(0, section.getColors().size())
+                .mapToObj(i -> super.getColor(section.getColors().get(i)))
+                .collect(Collectors.toList());
+        }
 
-        // Get base color
-        Color baseColor = super.getColor(section.getColors().get(0));
-
-        // Transition time calculated from the interval property. Interval represents
-        // the whole blink animation so one transition equals to half of the interval's
-        // time minus one (one frame representing the actual color)
-        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "interval") / 2 - 1;
+        // Transition time calculated from the interval property and the size of the color list.
+        // One frame represents the actual color so thats why we will minus one.
+        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "interval") / colors.size() - 1;
 
         // Construct color mask
         List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());
 
-        // Construct first array
-        List<Color> blackColorList = mask.stream()
-            .map(i -> i == 1 ? blackColor : null) // Set base color based to mask
-            .collect(Collectors.toList());
-
-        // Construct second array
-        List<Color> baseColorList = mask.stream()
-            .map(i -> i == 1 ? baseColor : null) // Set base color based to mask
-            .collect(Collectors.toList());
-
-        // Build a list containing two transition steps
-        return Arrays.asList(
-            new TransitionStep(blackColorList, transitionTime),
-            new TransitionStep(baseColorList, transitionTime));
+        return colors.stream()
+                .map(color -> new TransitionStep(
+                        mask.stream()
+                            .map(i -> i == 1 ? color : null) // Set base color based to mask
+                            .collect(Collectors.toList()),
+                        transitionTime
+                ))
+                .collect(Collectors.toList());
     }
 
 }
