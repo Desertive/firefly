@@ -12,11 +12,11 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
 
-    public Color getColor(HashMap<String, Integer> properties) {
+    public <T> Color getColor(HashMap<T, Integer> properties) {
         return new Color(
-            ActionRequestUtil.getIntPropertyOrThrow(properties, "r"),
-            ActionRequestUtil.getIntPropertyOrThrow(properties, "g"),
-            ActionRequestUtil.getIntPropertyOrThrow(properties, "b"));
+            ActionRequestUtil.getIntPropertyOrThrow(properties, 'r'),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, 'g'),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, 'b'));
     }
 
     public List<Integer> generateLedMask(Integer start, Integer end) {
@@ -27,6 +27,6 @@ public abstract class ActionService {
             .collect(Collectors.toList());
     }
 
-    public abstract List<TransitionStep> generateTransitionSteps(Section ledStripSection);
+    public abstract List<TransitionStep> generateTransitionSteps(Section section);
 
 }

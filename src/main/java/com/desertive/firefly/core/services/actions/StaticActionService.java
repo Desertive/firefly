@@ -13,12 +13,12 @@ public class StaticActionService extends ActionService {
     /*
      * Static action presents only one static color without animation
      */
-    public List<TransitionStep> generateTransitionSteps(Section ledStripSection) {
+    public List<TransitionStep> generateTransitionSteps(Section section) {
         // Get base color
-        Color baseColor = super.getColor(ledStripSection.getProperties());
+        Color baseColor = super.getColor(section.getColors().get(0));
 
         // Construct color mask
-        List<Integer> mask = super.generateLedMask(ledStripSection.getStart(), ledStripSection.getEnd());
+        List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());
 
         // Init color array
         List<Color> colors = mask.stream()

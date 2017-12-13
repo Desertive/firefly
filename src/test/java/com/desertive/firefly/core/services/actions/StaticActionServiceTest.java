@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
+import com.desertive.firefly.core.data.builders.SectionBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,32 +18,32 @@ public class StaticActionServiceTest {
 
     ActionServiceFactory actionServiceFactory = new ActionServiceFactory();
     ActionService actionService;
-    Section ledStripSection;
+    Section section;
 
     @Before
     public void initalizeTestEnvironment() {
         actionService = actionServiceFactory.getInstance(ActionType.STATIC);
-        ledStripSection = buildLedStripSection();
+        section = buildSection();
     }
 
     @Test
     public void itShouldReturnOneTransitionStep() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).size(), 1);
+        assertEquals(actionService.generateTransitionSteps(section).size(), 1);
     }
 
     @Test
     public void transitionStepSleepShouldBeOne() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getSleep(), 1);
+        assertEquals(actionService.generateTransitionSteps(section).get(0).getSleep(), 1);
     }
 
     @Test
     public void transitionStepTransitionTimeShouldBeZero() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getTransitionTime(), 0);
+        assertEquals(actionService.generateTransitionSteps(section).get(0).getTransitionTime(), 0);
     }
 
     @Test
     public void transitionStepLedListShouldContainThreeNullsAndFourColors() {
-        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(ledStripSection);
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(section);
 
         List<Color> colors = transitionSteps.get(0).getColors();
 
@@ -60,14 +60,12 @@ public class StaticActionServiceTest {
         assertEquals(containsColor.size(), 4);
     }
 
-    private Section buildLedStripSection() {
-        return new LedStripSectionBuilder()
+    private Section buildSection() {
+        return new SectionBuilder()
             .setStart(3)
             .setEnd(6)
             .setType(ActionType.STATIC)
-            .setProperty("r", 1)
-            .setProperty("g", 1)
-            .setProperty("b", 1)
+            .addColor(1, 1, 1)
             .build();
     }
 

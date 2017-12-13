@@ -42,7 +42,7 @@ firefly:
     core:
         fps: 20
         heartbeat: 14000
-        timerThreads: 4
+        timerThreads: 2
     serialPort:
         name: /dev/ttyUSB0
     server:

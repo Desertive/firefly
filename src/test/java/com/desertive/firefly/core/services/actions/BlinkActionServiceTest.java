@@ -6,7 +6,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import com.desertive.firefly.core.data.builders.LedStripSectionBuilder;
+import com.desertive.firefly.core.data.builders.SectionBuilder;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -18,32 +18,32 @@ public class BlinkActionServiceTest {
 
     ActionServiceFactory actionServiceFactory = new ActionServiceFactory();
     ActionService actionService;
-    Section ledStripSection;
+    Section section;
 
     @Before
     public void initalizeTestEnvironment() {
         actionService = actionServiceFactory.getInstance(ActionType.BLINK);
-        ledStripSection = buildLedStripSection();
+        section = buildSection();
     }
 
     @Test
     public void itShouldReturnTwoTransitionSteps() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).size(), 2);
+        assertEquals(actionService.generateTransitionSteps(section).size(), 2);
     }
 
     @Test
     public void transitionStepSleepShouldBeOne() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getSleep(), 1);
+        assertEquals(actionService.generateTransitionSteps(section).get(0).getSleep(), 1);
     }
 
     @Test
     public void transitionStepTransitionTimeShouldBeOne() {
-        assertEquals(actionService.generateTransitionSteps(ledStripSection).get(0).getTransitionTime(), 1, 0);
+        assertEquals(actionService.generateTransitionSteps(section).get(0).getTransitionTime(), 1, 0);
     }
 
     @Test
     public void firstTransitionStepLedListShouldContainOneNullAndThreeBlackColors() {
-        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(ledStripSection);
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(section);
 
         List<Color> colors = transitionSteps.get(0).getColors();
 
@@ -62,7 +62,7 @@ public class BlinkActionServiceTest {
 
     @Test
     public void secondTransitionStepLedListShouldContainOneNullAndThreeBaseColors() {
-        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(ledStripSection);
+        List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(section);
 
         List<Color> colors = transitionSteps.get(1).getColors();
 
@@ -79,15 +79,13 @@ public class BlinkActionServiceTest {
         assertEquals(containsColor.size(), 3);
     }
 
-    private Section buildLedStripSection() {
-        return new LedStripSectionBuilder()
+    private Section buildSection() {
+        return new SectionBuilder()
             .setStart(1)
             .setEnd(3)
             .setType(ActionType.BLINK)
-            .setProperty("r", 2)
-            .setProperty("g", 2)
-            .setProperty("b", 2)
-            .setProperty("interval", 5)
+            .addColor(2, 2, 2)
+            .addProperty("interval", 5)
             .build();
     }
 }

@@ -45,7 +45,7 @@ The actual event for executing the flow. Action body can have following actions:
                 "start": 0, // Starting index of led strip
                 "end": 3, // Ending index of led strip
                 "type": "STATIC", // Action type (STATIC, BLINK)
-                "properties": { // Properties depending on action types
+                "color": {
                     "r": 255,
                     "g": 255,
                     "b": 255
@@ -55,10 +55,12 @@ The actual event for executing the flow. Action body can have following actions:
                 "start": 4,
                 "end": 7,
                 "type": "BLINK",
-                "properties": {
+                "color": {
                     "r": 255,
                     "g": 255,
-                    "b": 255,
+                    "b": 255
+                },
+                "properties": { // Properties depending on action types
                     "interval": 60 // Value as frames
                 }
             }
