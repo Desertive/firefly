@@ -24,12 +24,15 @@ public class StarrySkyActionService extends ActionService {
         // Star count
         int count = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "stars");
         
-        return IntStream.range(0, 10)
+        // Transition time
+        int transition = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "transition") - 1;
+        
+        return IntStream.range(0, 20)
                 .mapToObj(c -> new TransitionStep(
                         super.generateRandomLedMask(section.getStart(), section.getEnd(), count).stream()
                             .map(i -> i == 2 ? colors.get(i % colors.size()) : i == 1 ? backgroundColor : null)
                             .collect(Collectors.toList()),
-                        40
+                            transition
                 ))
                 .collect(Collectors.toList());
     }
