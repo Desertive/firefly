@@ -29,13 +29,13 @@ public class FrameService {
         int inputSize = input.size();
         int framesSize = frames.size();
 
-        // Calculate needed multiplication for smooth animation between sections.
+        // Calculate lowest common multiple for smooth animation between sections.
         // For example if section 1's animation is 6 frames long and section 2's
         // animation is 4 frames long, we should match the sizes so that both animations
         // loop seamlessly. So 6 and 4 should convert to 12 frames (6*2 and 4*3).
-        int inputMultiplication = calculateInputMultiplication(framesSize, inputSize);
+        int lcm = lcm(framesSize, inputSize);
 
-        return IntStream.range(0, inputSize * inputMultiplication)
+        return IntStream.range(0, lcm)
             .mapToObj(i -> mergeFrames(
                 framesSize > 0 ? frames.get(i % framesSize) : new Frame(),
                 input.get(i % inputSize)))
@@ -54,9 +54,9 @@ public class FrameService {
             .collect(Collectors.toList());
     }
 
-    int calculateInputMultiplication(int framesSize, int inputSize) {
+    int lcm(int framesSize, int inputSize) {
         return framesSize > 1 ? // If framesSize is over one, calculate input multiplication. Otherwise return one.
-            framesSize / BigInteger.valueOf(inputSize).gcd(BigInteger.valueOf(framesSize)).intValue() : 1;
+                inputSize * framesSize / BigInteger.valueOf(inputSize).gcd(BigInteger.valueOf(framesSize)).intValue() : inputSize;
     }
 
     Frame mergeFrames(Frame frame, Frame input) {

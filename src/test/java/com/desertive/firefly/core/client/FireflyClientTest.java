@@ -117,7 +117,7 @@ public class FireflyClientTest {
                         .setEnd(0)
                         .setType(ActionType.BLINK)
                         .addColor(100, 50, 200)
-                        .addProperty("interval", 8)
+                        .addProperty("transition", 4)
                         .build()
                     )
                 ));
@@ -153,7 +153,7 @@ public class FireflyClientTest {
                             .addColor(140, 140, 140)
                             .addColor(160, 120, 100)
                             .addColor(0, 0, 0)
-                            .addProperty("interval", 8)
+                            .addProperty("transition", 2)
                             .build()
                         )
                     ));
@@ -186,14 +186,14 @@ public class FireflyClientTest {
                         .setEnd(0)
                         .setType(ActionType.BLINK)
                         .addColor(100, 100, 100)
-                        .addProperty("interval", 4)
+                        .addProperty("transition", 2)
                         .build(),
                     new SectionBuilder()
                         .setStart(1)
                         .setEnd(1)
                         .setType(ActionType.BLINK)
                         .addColor(200, 200, 200)
-                        .addProperty("interval", 2)
+                        .addProperty("transition", 1)
                         .build()
                     )
                 ));
@@ -232,7 +232,7 @@ public class FireflyClientTest {
                         .setEnd(0)
                         .setType(ActionType.BLINK)
                         .addColor(100, 100, 100)
-                        .addProperty("interval", 4)
+                        .addProperty("transition", 2)
                         .build(),
                     new SectionBuilder()
                         .setStart(1)
