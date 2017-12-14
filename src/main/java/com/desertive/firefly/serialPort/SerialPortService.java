@@ -38,7 +38,7 @@ public class SerialPortService {
         buffer.put(generateColorBuffer(colors));
 
         // Print first color
-        LOG.debug(
+        LOG.info(
                 String.format("r: %d, g: %d, b: %d", buffer.get(6) & 0xFF, buffer.get(7) & 0xFF, buffer.get(8) & 0xFF));
 
         if (comPort.writeBytes(buffer.array(), (long) byteArrayLength) == -1) {

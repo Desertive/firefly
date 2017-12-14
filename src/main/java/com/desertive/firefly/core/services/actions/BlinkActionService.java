@@ -27,14 +27,12 @@ public class BlinkActionService extends ActionService {
                 add(getColor(section.getColors().get(0)));
             }};
         } else {
-            colors = IntStream.range(0, section.getColors().size())
-                .mapToObj(i -> super.getColor(section.getColors().get(i)))
-                .collect(Collectors.toList());
+            colors = super.getColors(section.getColors());
         }
 
         // Transition time calculated from the interval property and the size of the color list.
         // One frame represents the actual color so thats why we will minus one.
-        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "interval") / colors.size() - 1;
+        int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "transition") - 1;
 
         // Construct color mask
         List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());

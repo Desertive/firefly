@@ -1,6 +1,7 @@
 package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -12,18 +13,41 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
 
+    public List<Color> getColors(List<HashMap<Character, Integer>> colors) {
+        return IntStream.range(0, colors.size())
+                .mapToObj(i -> getColor(colors.get(i)))
+                .collect(Collectors.toList());
+    }
+    
     public <T> Color getColor(HashMap<T, Integer> properties) {
+        return getColor(properties, false);
+    }
+    
+    public <T> Color getColor(HashMap<T, Integer> properties, boolean string) {
         return new Color(
-            ActionRequestUtil.getIntPropertyOrThrow(properties, 'r'),
-            ActionRequestUtil.getIntPropertyOrThrow(properties, 'g'),
-            ActionRequestUtil.getIntPropertyOrThrow(properties, 'b'));
+            ActionRequestUtil.getIntPropertyOrThrow(properties, string ? "r" : 'r'),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, string ? "g" : 'g'),
+            ActionRequestUtil.getIntPropertyOrThrow(properties, string ? "b" : 'b'));
     }
 
     public List<Integer> generateLedMask(Integer start, Integer end) {
         return IntStream.rangeClosed(0, end)
-            .map(i -> i >= start ? 1 : 0) // Mask for the color array.
-            // 0 = set null, 1 = set base color
-            .boxed()
+            .mapToObj(i -> i >= start ? 1 : 0) // Mask for the color array.
+                                               // 0 = set null, 1 = set base color
+            .collect(Collectors.toList());
+    }
+    
+    public List<Integer> generateRandomLedMask(Integer start, Integer end, Integer count) {
+        List<Integer> randomNumbers = IntStream.range(start, end)
+                .boxed()
+                .collect(Collectors.toList());
+        Collections.shuffle(randomNumbers);
+        
+        List<Integer> maskedIndexes = randomNumbers.subList(0, randomNumbers.size() >= count ? count : randomNumbers.size());
+        
+        return IntStream.rangeClosed(0, end)
+            .mapToObj(i -> i >= start ? maskedIndexes.contains(i) ? 2 : 1 : 0) // Mask for the color array.
+                                                                               // 2 = primary color, 1 = background color, 0 = null
             .collect(Collectors.toList());
     }
 

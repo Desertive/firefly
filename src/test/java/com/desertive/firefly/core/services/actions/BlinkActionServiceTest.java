@@ -90,7 +90,7 @@ public class BlinkActionServiceTest {
             .setEnd(3)
             .setType(ActionType.BLINK)
             .addColor(2, 2, 2)
-            .addProperty("interval", 5)
+            .addProperty("transition", 2)
             .build();
     }
     
@@ -104,7 +104,7 @@ public class BlinkActionServiceTest {
             .addColor(0, 0, 0)
             .addColor(14, 14, 14)
             .addColor(10, 10, 10)
-            .addProperty("interval", 4)
+            .addProperty("transition", 2)
             .build();
     }
 }

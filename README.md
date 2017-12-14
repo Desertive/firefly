@@ -73,7 +73,31 @@ The actual event for executing the flow. Action body can have following actions:
                     }
                 ],
                 "properties": { // Properties depending on action types
-                    "interval": 60 // Value as frames
+                    "transition": 20, // Transition time from one color to another in frames
+                }
+            },
+            {
+                "start": 8,
+                "end": 15,
+                "type": "STARRY_SKY",
+                "colors": [
+                    {
+                        "r": 255,
+                        "g": 255,
+                        "b": 255
+                    },
+                    {
+                        "r": 0,
+                        "g": 0,
+                        "b": 200
+                    }
+                ],
+                "properties": { // Properties depending on action types
+                    "stars": 3, // Count of blinking lights which are randomly placed.
+                    "transition": 20, // Transition time from one color to another in frames
+                    "r": 0,
+                    "g": 0, // Fill color for non-star leds
+                    "b": 0
                 }
             }
         ]
