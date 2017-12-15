@@ -14,15 +14,15 @@ public class StaticActionService extends ActionService {
      * Static action presents only one static color without animation
      */
     public List<TransitionStep> generateTransitionSteps(Section section) {
-        // Get base color
-        Color baseColor = super.getColor(section.getColors().get(0));
+        // Get desired colors
+        List<Color> reqColors = super.getColors(section.getColors());
 
         // Construct color mask
         List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());
 
         // Init color array
         List<Color> colors = mask.stream()
-            .map(i -> i == 1 ? baseColor : null) // Set base color based to mask
+            .map(i -> i >= 1 ? reqColors.get((i - 1) % reqColors.size()) : null) // Set color based to mask
             .collect(Collectors.toList());
 
         // Because there are no animation, build one step and return it

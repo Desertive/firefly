@@ -40,7 +40,7 @@ public class BlinkActionService extends ActionService {
         return colors.stream()
                 .map(color -> new TransitionStep(
                         mask.stream()
-                            .map(i -> i == 1 ? color : null) // Set base color based to mask
+                            .map(i -> i >= 1 ? color : null) // Set base color based to mask
                             .collect(Collectors.toList()),
                         transitionTime
                 ))

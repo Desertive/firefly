@@ -55,7 +55,7 @@ public class FrameService {
     }
 
     int lcm(int framesSize, int inputSize) {
-        return framesSize > 1 ? // If framesSize is over one, calculate input multiplication. Otherwise return one.
+        return framesSize > 1 ? // If framesSize is over one, calculate lowest common multiple. Otherwise return inputSize.
                 inputSize * framesSize / BigInteger.valueOf(inputSize).gcd(BigInteger.valueOf(framesSize)).intValue() : inputSize;
     }
 
