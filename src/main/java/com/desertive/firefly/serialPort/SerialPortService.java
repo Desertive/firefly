@@ -18,8 +18,11 @@ public class SerialPortService {
 
     private SerialPort comPort;
     private static final int STARTING_BYTES_LENGTH = 6;
+    private long lastWrite = 0;
+    private final int cooldown;
 
-    public SerialPortService(String name) {
+    public SerialPortService(String name, int fps) {
+        this.cooldown = 1000 / fps - 10;
         comPort = SerialPort.getCommPort(name);
         comPort.setBaudRate(115200);
         comPort.setParity(SerialPort.NO_PARITY);
@@ -31,6 +34,11 @@ public class SerialPortService {
     }
 
     public void write(List<Color> colors) {
+        // Don't let requests flow to serial port too often
+        long timestamp = System.currentTimeMillis();
+        if (lastWrite + cooldown > timestamp) return;
+        this.lastWrite = timestamp;
+
         final int byteArrayLength = STARTING_BYTES_LENGTH + colors.size() * 3;
         ByteBuffer buffer = ByteBuffer.allocate(byteArrayLength);
 

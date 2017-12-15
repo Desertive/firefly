@@ -54,6 +54,6 @@ public class DefaultConfiguration {
     
     @Bean
     public SerialPortService SerialPortService() {
-        return new SerialPortService(serialPortName);
+        return new SerialPortService(serialPortName, fps);
     }
 }
