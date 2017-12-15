@@ -74,6 +74,7 @@ public class FireflyClientTest {
                         .setEnd(1)
                         .setType(ActionType.STATIC)
                         .addColor(242, 194, 8)
+                        .addColor(1, 1, 1)
                         .build(),
                     new SectionBuilder()
                         .setStart(2)
@@ -93,7 +94,7 @@ public class FireflyClientTest {
                 assertTrue(getFrameColor(frames, 0, 0)
                     .equals(new Color(242, 194, 8)));
                 assertTrue(getFrameColor(frames, 0, 1)
-                    .equals(new Color(242, 194, 8)));
+                    .equals(new Color(1, 1, 1)));
                 assertTrue(getFrameColor(frames, 0, 2)
                     .equals(new Color(51, 46, 64)));
                 assertTrue(getFrameColor(frames, 0, 5)
