@@ -12,7 +12,7 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 public class BlinkActionService extends ActionService {
 
 	/*
-     * Blink action
+     * Blink action for changing colors alternately for the whole section
 	 */
 
     public List<TransitionStep> generateTransitionSteps(Section section) {
@@ -32,12 +32,12 @@ public class BlinkActionService extends ActionService {
         int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "transition") - 1;
 
         // Construct color mask
-        List<Integer> mask = super.generateLedMask(section.getStart(), section.getEnd());
+        List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());
 
         return colors.stream()
                 .map(color -> new TransitionStep(
-                        mask.stream()
-                            .map(i -> i >= 1 ? color : null) // Set base color based to mask
+                    maskList.stream()
+                            .map(mask -> mask >= 1 ? color : null) // Set base color based to mask
                             .collect(Collectors.toList()),
                         transitionTime
                 ))
