@@ -16,4 +16,14 @@ public class ActionRequestUtil {
         }
     }
 
+    public static <T> Integer getIntProperty(HashMap<T, Integer> properties, Object key, Integer defaultValue) {
+        Integer value;
+        try {
+            value = getIntPropertyOrThrow(properties, key);
+        } catch (IllegalArgumentException e) {
+            value = defaultValue;
+        }
+        return value;
+    }
+
 }

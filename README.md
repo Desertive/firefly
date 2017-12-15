@@ -45,18 +45,25 @@ The actual event for executing the flow. Action body can have following actions:
                 "start": 0, // Starting index of led strip
                 "end": 3, // Ending index of led strip
                 "type": "STATIC", // Action type (STATIC, BLINK)
-                "color": {
-                    "r": 255,
-                    "g": 255,
-                    "b": 255
-                }
+                "colors": [ // Colors which are looped through the section
+                    { // In this example we will show white and black alternately
+                        "r": 255,
+                        "g": 255,
+                        "b": 255
+                    },
+                    {
+                        "r": 0,
+                        "g": 0,
+                        "b": 0
+                    }
+                ]
             },
             {
                 "start": 4,
                 "end": 7,
-                "type": "BLINK",
+                "type": "BLINK", // Whole section blink example
                 "colors": [ // Colors which are presented in blink animation
-                    {
+                    { // In this example we will show white, black and grey one at a time with smooth transitions
                         "r": 255,
                         "g": 255,
                         "b": 255
@@ -67,21 +74,21 @@ The actual event for executing the flow. Action body can have following actions:
                         "b": 0
                     },
                     {
-                        "r": 120,
-                        "g": 60,
-                        "b": 200
+                        "r": 100,
+                        "g": 100,
+                        "b": 100
                     }
                 ],
-                "properties": { // Properties depending on action types
+                "properties": {
                     "transition": 20, // Transition time from one color to another in frames
                 }
             },
             {
                 "start": 8,
                 "end": 15,
-                "type": "STARRY_SKY",
+                "type": "RANDOM_BLINK", // Random blink example
                 "colors": [
-                    {
+                    { // In this example we will request white and blue random blinking
                         "r": 255,
                         "g": 255,
                         "b": 255
@@ -92,11 +99,12 @@ The actual event for executing the flow. Action body can have following actions:
                         "b": 200
                     }
                 ],
-                "properties": { // Properties depending on action types
-                    "stars": 3, // Count of blinking lights which are randomly placed.
+                "properties": {
+                    "blinkers": 3, // Count of blinking lights which are randomly placed
                     "transition": 20, // Transition time from one color to another in frames
+                    "steps": 20, // Optional. How many times blinkers are randomly placed before loop.
                     "r": 0,
-                    "g": 0, // Fill color for non-star leds
+                    "g": 0, // Fill color for non-blinking leds
                     "b": 0
                 }
             }
