@@ -30,6 +30,13 @@ public abstract class ActionService {
             ActionRequestUtil.getIntPropertyOrThrow(properties, string ? "b" : 'b'));
     }
 
+    public <T> Color getColorOrDefault(HashMap<T, Integer> properties, boolean string, Color color) {
+        return new Color(
+            ActionRequestUtil.getIntProperty(properties, string ? "r" : 'r', color.getRed()),
+            ActionRequestUtil.getIntProperty(properties, string ? "g" : 'g', color.getGreen()),
+            ActionRequestUtil.getIntProperty(properties, string ? "b" : 'b', color.getBlue()));
+    }
+
     public List<Integer> generateLedMask(Integer start, Integer end) {
         return IntStream.rangeClosed(0, end)
             .mapToObj(i -> i >= start ? i - start + 1 : 0) // Mask for the color array.

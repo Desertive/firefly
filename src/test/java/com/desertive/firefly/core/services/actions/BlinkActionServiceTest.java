@@ -93,7 +93,7 @@ public class BlinkActionServiceTest {
             .addProperty("transition", 2)
             .build();
     }
-    
+
     private Section buildSectionWithFiveColors() {
         return new SectionBuilder()
             .setStart(1)

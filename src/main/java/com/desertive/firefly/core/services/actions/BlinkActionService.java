@@ -2,10 +2,8 @@ package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
@@ -14,8 +12,7 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 public class BlinkActionService extends ActionService {
 
 	/*
-     * Thoughts for the future: service could handle n+1 colors, so that blink
-	 * effect could be created between multiple colors.
+     * Blink action
 	 */
 
     public List<TransitionStep> generateTransitionSteps(Section section) {
