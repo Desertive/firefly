@@ -19,7 +19,7 @@ public class RandomBlinkActionService extends ActionService {
         List<Color> colors = super.getColors(section.getColors());
 
         // Background color
-        Color fillColor = super.getColorOrDefault(section.getProperties(), true, new Color(0, 0, 0));
+        Color fillColor = super.getColorOrDefault(section.getProperties(), new Color(0, 0, 0));
 
         // Blinkers count
         int blinkerCount = ActionRequestUtil.getIntProperty(section.getProperties(), "blinkers", section.getEnd() - section.getStart());

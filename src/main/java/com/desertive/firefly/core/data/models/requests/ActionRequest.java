@@ -92,7 +92,7 @@ public class ActionRequest {
         private Integer end;
         @NotNull(message = "Section should have at least one color")
         @Size(min = 1)
-        private List<HashMap<Character, Integer>> colors;
+        private List<HashMap<String, Integer>> colors;
         @NotNull(message = "Section should have type of action declared")
         private ActionType type;
         private HashMap<String, Integer> properties;
@@ -116,16 +116,16 @@ public class ActionRequest {
             this.end = end;
         }
 
-        public List<HashMap<Character, Integer>> getColors() {
+        public List<HashMap<String, Integer>> getColors() {
             return colors;
         }
 
-        public void setColors(List<HashMap<Character, Integer>> colors) {
+        public void setColors(List<HashMap<String, Integer>> colors) {
             this.colors = colors;
         }
         
-        public void setColor(HashMap<Character, Integer> color) {
-            this.colors = new ArrayList<HashMap<Character, Integer>>() {{
+        public void setColor(HashMap<String, Integer> color) {
+            this.colors = new ArrayList<HashMap<String, Integer>>() {{
                 add(color);
             }};
         }

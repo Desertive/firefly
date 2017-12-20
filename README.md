@@ -39,12 +39,12 @@ The actual event for executing the flow. Action body can have following actions:
                               // true = Run animation once and after that keep the last frame's state
                               // false = Loop animation
                               // If set to true, resetAnimation will also be automatically set to true
-        }
+        },
         "sections": [
             {
                 "start": 0, // Starting index of led strip
                 "end": 3, // Ending index of led strip
-                "type": "STATIC", // Action type (STATIC, BLINK)
+                "type": "STATIC", // Action type
                 "colors": [ // Colors which are looped through the section
                     { // In this example we will show white and black alternately
                         "r": 255,
