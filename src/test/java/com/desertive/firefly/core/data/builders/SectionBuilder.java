@@ -25,19 +25,19 @@ public class SectionBuilder {
         return this;
     }
 
-    public SectionBuilder setColors(List<HashMap<Character, Integer>> colors) {
+    public SectionBuilder setColors(List<HashMap<String, Integer>> colors) {
         section.setColors(colors);
         return this;
     }
     
     public SectionBuilder addColor(int r, int g, int b) {
-        HashMap<Character, Integer> color = new HashMap<Character, Integer>() {{
-            put('r', r);
-            put('g', g);
-            put('b', b);
+        HashMap<String, Integer> color = new HashMap<String, Integer>() {{
+            put("r", r);
+            put("g", g);
+            put("b", b);
         }};
         if (section.getColors() == null) {
-            section.setColors(new ArrayList<HashMap<Character, Integer>>() {{
+            section.setColors(new ArrayList<HashMap<String, Integer>>() {{
                 add(color);
             }});
         } else {
