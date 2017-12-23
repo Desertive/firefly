@@ -49,8 +49,8 @@ public abstract class ActionService {
         List<Integer> maskedIndexes = randomNumbers.subList(0, randomNumbers.size() >= count ? count : randomNumbers.size());
         
         return IntStream.rangeClosed(0, end)
-            .mapToObj(i -> i >= start ? maskedIndexes.contains(i) ? 2 : 1 : 0) // Mask for the color array.
-                                                                               // 2 = primary color, 1 = background color, 0 = null
+            .mapToObj(i -> i >= start ? maskedIndexes.contains(i) ? i + 2 : 1 : 0) // Mask for the color array.
+                                                                                   // >= 2 = primary color, 1 = background color, 0 = null
             .collect(Collectors.toList());
     }
 
