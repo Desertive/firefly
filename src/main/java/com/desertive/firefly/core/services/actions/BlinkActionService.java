@@ -21,10 +21,10 @@ public class BlinkActionService extends ActionService {
         if (section.getColors().size() == 1) {
             colors = new ArrayList<Color>() {{
                 add(new Color(0, 0, 0));
-                add(getColor(section.getColors().get(0)));
+                add(getColorOrThrow(section.getColors().get(0)));
             }};
         } else {
-            colors = super.getColors(section.getColors());
+            colors = super.getColorsOrThrow(section.getColors());
         }
 
         // Transition time calculated from the interval property and the size of the color list.

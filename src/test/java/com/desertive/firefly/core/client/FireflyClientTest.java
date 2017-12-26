@@ -223,6 +223,45 @@ public class FireflyClientTest {
 
         });
 
+        describe("Wave type", () -> {
+
+            it("should return four frames", () -> {
+
+                List<Frame> frames = fireflyClient.process(request(Arrays.asList(
+                    new SectionBuilder()
+                        .setStart(0)
+                        .setEnd(3)
+                        .setType(ActionType.WAVE)
+                        .addColor(100, 100, 100)
+                        .addProperty("speed", 1)
+                        .addProperty("length", 2)
+                        .build()
+                    )
+                ));
+
+                assertEquals(frames.size(), 4);
+
+                assertTrue(getFrameColor(frames, 0, 0)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 1, 0)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 2, 0)
+                    .equals(new Color(0, 0, 0)));
+                assertTrue(getFrameColor(frames, 3, 0)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 0, 1)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 1, 1)
+                    .equals(new Color(0, 0, 0)));
+                assertTrue(getFrameColor(frames, 2, 1)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 3, 1)
+                    .equals(new Color(100, 100, 100)));
+
+            });
+
+        });
+
         describe("Mixed types", () -> {
 
             it("should return correct frames with blink and static types combined", () -> {

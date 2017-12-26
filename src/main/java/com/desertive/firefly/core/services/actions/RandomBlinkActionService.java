@@ -16,7 +16,7 @@ public class RandomBlinkActionService extends ActionService {
      */
     public List<TransitionStep> generateTransitionSteps(Section section) {
         // Desired colors
-        List<Color> colors = super.getColors(section.getColors());
+        List<Color> colors = super.getColorsOrThrow(section.getColors());
 
         // Background color
         Color fillColor = super.getColorOrDefault(section.getProperties(), new Color(0, 0, 0));

@@ -1,7 +1,8 @@
 package com.desertive.firefly.core.data.models;
 
 public enum ActionType {
-    STATIC, // Show requested color
-    BLINK, // Turn color on and off in requested interval
-    RANDOM_BLINK // Randomly blinking lights
+    STATIC, // Show requested colors
+    BLINK, // Smooth transition between requested colors
+    RANDOM_BLINK, // Randomly blinking lights
+    WAVE // Smooth color gradient with animation
 }
