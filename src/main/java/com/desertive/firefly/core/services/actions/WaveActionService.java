@@ -38,11 +38,14 @@ public class WaveActionService extends ActionService {
             colors = super.getColorsOrThrow(section.getColors());
         }
 
-        // How many frames it should take to move the color from the current led to the next led
-        int speed = ActionRequestUtil.getIntProperty(section.getProperties(), "speed", 4) - 1;
+        // How many frames it should take to go through the whole wave for one led
+        int speed = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "speed");
 
         // Gradient length between two colors
-        int length = ActionRequestUtil.getIntProperty(section.getProperties(), "length", 20) - 1;
+        int length = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "length", 20) - 1;
+
+        // Direction of the wave. 0 = ascending order, 1 = descending order
+        int direction = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "direction", 0);
 
         // Construct color mask
         List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());
@@ -65,11 +68,21 @@ public class WaveActionService extends ActionService {
 
         List<Color> matchedGradient = matchToSectionLength(fullGradient, section.getEnd() - section.getStart() + 1);
 
-        return IntStream.range(0, matchedGradient.size())
+        List<TransitionStep> steps = IntStream.range(0, matchedGradient.size())
             .mapToObj(i -> shiftColors(matchedGradient, i))
+            .map(list -> reverseListIfRequested(list, direction))
             .map(list -> addStartingNulls(list, section.getStart()))
-            .map(list -> new TransitionStep(list, speed, 1))
+            .map(list -> new TransitionStep(list, speed / fullGradient.size() - 1, 1))
             .collect(Collectors.toList());
+
+        int skip = Math.max(fullGradient.size() / speed, 1);
+
+        List<TransitionStep> skippedSteps = new ArrayList<>();
+        IntStream.range(0, steps.size())
+            .forEach(i -> {
+                if (i % skip == 0) skippedSteps.add(steps.get(i)); // TODO: remove side-effect
+            });
+        return skippedSteps;
     }
 
     List<Color> matchToSectionLength(List<Color> colors, int sectionLength) {
@@ -80,6 +93,11 @@ public class WaveActionService extends ActionService {
             .mapToObj(i -> colors)
             .flatMap(list -> list.stream())
             .collect(Collectors.toList());
+    }
+
+    List<Color> reverseListIfRequested(List<Color> colors, int direction) {
+        if (direction == 1) Collections.reverse(colors);
+        return colors;
     }
 
     List<Color> shiftColors(List<Color> colors, int shift) {

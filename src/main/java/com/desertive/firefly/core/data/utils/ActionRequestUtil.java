@@ -16,7 +16,7 @@ public class ActionRequestUtil {
         }
     }
 
-    public static <T> Integer getIntProperty(HashMap<T, Integer> properties, Object key, Integer defaultValue) {
+    public static <T> Integer getIntPropertyOrDefault(HashMap<T, Integer> properties, Object key, Integer defaultValue) {
         Integer value;
         try {
             value = getIntPropertyOrThrow(properties, key);
