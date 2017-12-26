@@ -107,6 +107,27 @@ The actual event for executing the flow. Action body can have following actions:
                     "g": 0, // Fill color for non-blinking leds
                     "b": 0
                 }
+            },
+            {
+                "start": 16,
+                "end": 23,
+                "type": "WAVE", // Wave example
+                "colors": [
+                    { // In this example we will request waving between white and red
+                        "r": 255,
+                        "g": 255,
+                        "b": 255
+                    },
+                    {
+                        "r": 255,
+                        "g": 0,
+                        "b": 0
+                    }
+                ],
+                "properties": {
+                    "speed": 1, // Speed of color in frames for color hopping to the next led
+                    "length": 20 // Count of leds for requested color and easing leds before next color
+                }
             }
         ]
     }

@@ -15,7 +15,7 @@ public class StaticActionService extends ActionService {
      */
     public List<TransitionStep> generateTransitionSteps(Section section) {
         // Get desired colors
-        List<Color> reqColors = super.getColors(section.getColors());
+        List<Color> reqColors = super.getColorsOrThrow(section.getColors());
 
         // Construct color mask
         List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());

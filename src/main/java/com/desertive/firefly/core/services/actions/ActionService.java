@@ -13,13 +13,13 @@ import com.desertive.firefly.core.data.utils.ActionRequestUtil;
 
 public abstract class ActionService {
 
-    public List<Color> getColors(List<HashMap<String, Integer>> colors) {
+    public List<Color> getColorsOrThrow(List<HashMap<String, Integer>> colors) {
         return IntStream.range(0, colors.size())
-                .mapToObj(i -> getColor(colors.get(i)))
+                .mapToObj(i -> getColorOrThrow(colors.get(i)))
                 .collect(Collectors.toList());
     }
     
-    public Color getColor(HashMap<String, Integer> properties) {
+    public Color getColorOrThrow(HashMap<String, Integer> properties) {
         return new Color(
             ActionRequestUtil.getIntPropertyOrThrow(properties, "r"),
             ActionRequestUtil.getIntPropertyOrThrow(properties, "g"),
