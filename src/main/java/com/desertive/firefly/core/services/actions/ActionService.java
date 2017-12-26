@@ -28,9 +28,9 @@ public abstract class ActionService {
 
     public Color getColorOrDefault(HashMap<String, Integer> properties, Color color) {
         return new Color(
-            ActionRequestUtil.getIntProperty(properties, "r", color.getRed()),
-            ActionRequestUtil.getIntProperty(properties, "g", color.getGreen()),
-            ActionRequestUtil.getIntProperty(properties, "b", color.getBlue()));
+            ActionRequestUtil.getIntPropertyOrDefault(properties, "r", color.getRed()),
+            ActionRequestUtil.getIntPropertyOrDefault(properties, "g", color.getGreen()),
+            ActionRequestUtil.getIntPropertyOrDefault(properties, "b", color.getBlue()));
     }
 
     public List<Integer> generateLedMask(Integer start, Integer end) {

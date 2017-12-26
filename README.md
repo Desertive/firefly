@@ -125,8 +125,9 @@ The actual event for executing the flow. Action body can have following actions:
                     }
                 ],
                 "properties": {
-                    "speed": 1, // Speed of color in frames for color hopping to the next led
-                    "length": 20 // Count of leds for requested color and easing leds before next color
+                    "speed": 40, // Speed of color in frames for going through the whole wave in one led
+                    "length": 20, // Count of leds for requested color and easing leds before next color
+                    "direction": 0 // Direction of the wave. 0 = ascending order, 1 = descending order
                 }
             }
         ]

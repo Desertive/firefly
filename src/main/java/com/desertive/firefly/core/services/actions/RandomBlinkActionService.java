@@ -22,13 +22,13 @@ public class RandomBlinkActionService extends ActionService {
         Color fillColor = super.getColorOrDefault(section.getProperties(), new Color(0, 0, 0));
 
         // Blinkers count
-        int blinkerCount = ActionRequestUtil.getIntProperty(section.getProperties(), "blinkers", section.getEnd() - section.getStart());
+        int blinkerCount = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "blinkers", section.getEnd() - section.getStart());
 
         // Transition time
-        int transition = ActionRequestUtil.getIntProperty(section.getProperties(), "transition", 20) - 1;
+        int transition = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "transition", 20) - 1;
 
         // Step count
-        int steps = ActionRequestUtil.getIntProperty(section.getProperties(), "steps", 20);
+        int steps = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "steps", 20);
 
         return IntStream.range(0, steps)
             .mapToObj(i -> new TransitionStep(
