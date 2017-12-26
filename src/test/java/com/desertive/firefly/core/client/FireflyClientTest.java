@@ -233,7 +233,7 @@ public class FireflyClientTest {
                         .setEnd(3)
                         .setType(ActionType.WAVE)
                         .addColor(100, 100, 100)
-                        .addProperty("speed", 1)
+                        .addProperty("speed", 4)
                         .addProperty("length", 2)
                         .build()
                     )
