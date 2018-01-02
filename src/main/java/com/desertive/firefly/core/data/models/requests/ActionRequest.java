@@ -90,6 +90,7 @@ public class ActionRequest {
         @NotNull(message = "Section should have ending point")
         @Min(0)
         private Integer end;
+        private List<Subsection> subsections;
         @NotNull(message = "Section should have at least one color")
         @Size(min = 1)
         private List<HashMap<String, Integer>> colors;
@@ -114,6 +115,14 @@ public class ActionRequest {
 
         public void setEnd(Integer end) {
             this.end = end;
+        }
+
+        public List<Subsection> getSubsections() {
+            return subsections;
+        }
+
+        public void setSubsections(List<Subsection> subsections) {
+            this.subsections = subsections;
         }
 
         public List<HashMap<String, Integer>> getColors() {
@@ -144,6 +153,32 @@ public class ActionRequest {
 
         public void setProperties(HashMap<String, Integer> properties) {
             this.properties = properties;
+        }
+
+        public static class Subsection {
+
+            @NotNull(message = "Subsection should have starting point")
+            @Min(0)
+            private Integer start;
+            @Min(0)
+            private Integer end;
+
+            public Integer getStart() {
+                return start;
+            }
+
+            public void setStart(Integer start) {
+                this.start = start;
+            }
+
+            public Integer getEnd() {
+                return end != null ? end : start;
+            }
+
+            public void setEnd(Integer end) {
+                this.end = end;
+            }
+
         }
 
     }
