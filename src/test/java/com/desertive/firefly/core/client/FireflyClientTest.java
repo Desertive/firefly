@@ -1,6 +1,7 @@
 package com.desertive.firefly.core.client;
 
 import java.awt.Color;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
@@ -231,6 +232,8 @@ public class FireflyClientTest {
                     new SectionBuilder()
                         .setStart(0)
                         .setEnd(3)
+                        .addSubsection(0, 1)
+                        .addSubsection(3)
                         .setType(ActionType.WAVE)
                         .addColor(100, 100, 100)
                         .addProperty("speed", 4)
@@ -257,6 +260,18 @@ public class FireflyClientTest {
                     .equals(new Color(50, 50, 50)));
                 assertTrue(getFrameColor(frames, 3, 1)
                     .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 2) == null);
+                assertTrue(getFrameColor(frames, 1, 2) == null);
+                assertTrue(getFrameColor(frames, 2, 2) == null);
+                assertTrue(getFrameColor(frames, 3, 2) == null);
+                assertTrue(getFrameColor(frames, 0, 3)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 1, 3)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 2, 3)
+                    .equals(new Color(50, 50, 50)));
+                assertTrue(getFrameColor(frames, 3, 3)
+                    .equals(new Color(0, 0, 0)));
 
             });
 
@@ -319,7 +334,8 @@ public class FireflyClientTest {
     }
 
     Color getFrameColor(List<Frame> frames, int frameIndex, int colorIndex) {
-        return frames.get(frameIndex).getColors().get(colorIndex);
+        List<Color> colors = frames.get(frameIndex).getColors();
+        return colors.size() > colorIndex ? colors.get(colorIndex) : null;
     }
 
 }

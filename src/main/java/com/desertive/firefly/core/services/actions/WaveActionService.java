@@ -72,6 +72,7 @@ public class WaveActionService extends ActionService {
             .mapToObj(i -> shiftColors(matchedGradient, i))
             .map(list -> reverseListIfRequested(list, direction))
             .map(list -> addStartingNulls(list, section.getStart()))
+            .map(list -> passWhitelistedColors(list, section.getSubsections()))
             .map(list -> new TransitionStep(list, speed / fullGradient.size() - 1, 1))
             .collect(Collectors.toList());
 

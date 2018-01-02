@@ -25,6 +25,30 @@ public class SectionBuilder {
         return this;
     }
 
+    public SectionBuilder setSubsections(List<Section.Subsection> subsections) {
+        section.setSubsections(subsections);
+        return this;
+    }
+
+    public SectionBuilder addSubsection(int start) {
+        return addSubsection(start, start);
+    }
+
+    public SectionBuilder addSubsection(int start, int end) {
+        Section.Subsection subsection = new Section.Subsection() {{
+            this.setStart(start);
+            this.setEnd(end);
+        }};
+        if (section.getSubsections() == null) {
+            section.setSubsections(new ArrayList<Section.Subsection>() {{
+                add(subsection);
+            }});
+        } else {
+            section.getSubsections().add(subsection);
+        }
+        return this;
+    }
+
     public SectionBuilder setColors(List<HashMap<String, Integer>> colors) {
         section.setColors(colors);
         return this;

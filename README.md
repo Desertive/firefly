@@ -111,6 +111,18 @@ The actual event for executing the flow. Action body can have following actions:
             {
                 "start": 16,
                 "end": 23,
+                "subSections": [ // Optional. Subsections whitelist certain area(s) of the section where we should
+                                 // show the lights. Other areas in the section are presented as nulls so there
+                                 // can be other action types in those null areas
+                    {
+                        "start": 16,
+                        "end": 20 // Optional. If end is not defined, we'll whitelist only the starting led
+                    },
+                    {
+                        "start": 23 // We skipped light index 21 and 22, those can be used with other action type if desired.
+                                    // Otherwise they will be filled according to resetColors-option.
+                    }
+                ],
                 "type": "WAVE", // Wave example
                 "colors": [
                     { // In this example we will request waving between white and red
