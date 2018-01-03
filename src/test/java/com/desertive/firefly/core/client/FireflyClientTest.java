@@ -107,6 +107,57 @@ public class FireflyClientTest {
 
             });
 
+            it("should skip every second index", () -> {
+
+                List<Frame> frames = fireflyClient.process(request(Arrays.asList(
+                    new SectionBuilder()
+                        .setStart(0)
+                        .setEnd(3)
+                        .setEvery(2) // Use every second index
+                        .setType(ActionType.STATIC)
+                        .addColor(100, 100, 100)
+                        .build()
+                    )
+                ));
+
+                assertEquals(frames.size(), 1);
+                assertTrue(getFrameColor(frames, 0, 0)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 1) == null);
+                assertTrue(getFrameColor(frames, 0, 2)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 3) == null);
+
+            });
+
+            it("should skip indexes which are not defined in the subsections", () -> {
+
+                List<Frame> frames = fireflyClient.process(request(Arrays.asList(
+                    new SectionBuilder()
+                        .setStart(0)
+                        .setEnd(5)
+                        .addSubsection(0, 2)
+                        .addSubsection(5)
+                        .setType(ActionType.STATIC)
+                        .addColor(100, 100, 100)
+                        .build()
+                    )
+                ));
+
+                assertEquals(frames.size(), 1);
+                assertTrue(getFrameColor(frames, 0, 0)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 1)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 2)
+                    .equals(new Color(100, 100, 100)));
+                assertTrue(getFrameColor(frames, 0, 3) == null);
+                assertTrue(getFrameColor(frames, 0, 4) == null);
+                assertTrue(getFrameColor(frames, 0, 5)
+                    .equals(new Color(100, 100, 100)));
+
+            });
+
         });
 
         describe("Blink type", () -> {
