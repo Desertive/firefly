@@ -90,6 +90,8 @@ public class ActionRequest {
         @NotNull(message = "Section should have ending point")
         @Min(0)
         private Integer end;
+        @Min(2)
+        private Integer every;
         private List<Subsection> subsections;
         @NotNull(message = "Section should have at least one color")
         @Size(min = 1)
@@ -117,6 +119,14 @@ public class ActionRequest {
             this.end = end;
         }
 
+        public Integer getEvery() {
+            return every;
+        }
+
+        public void setEvery(Integer every) {
+            this.every = every;
+        }
+
         public List<Subsection> getSubsections() {
             return subsections;
         }
@@ -132,7 +142,8 @@ public class ActionRequest {
         public void setColors(List<HashMap<String, Integer>> colors) {
             this.colors = colors;
         }
-        
+
+        // Alias for colors, except sets only one color
         public void setColor(HashMap<String, Integer> color) {
             this.colors = new ArrayList<HashMap<String, Integer>>() {{
                 add(color);

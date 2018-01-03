@@ -27,7 +27,9 @@ public class StaticActionService extends ActionService {
 
         // Because there are no animation, build one step and return it
         return Arrays.asList(new TransitionStep(
-            passWhitelistedColors(colors, section.getSubsections())
+            passEveryDesiredColors(
+                passSubsectionColors(colors, section.getSubsections()),
+                section.getStart(), section.getEvery())
         ));
     }
 

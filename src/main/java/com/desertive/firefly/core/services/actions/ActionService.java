@@ -38,7 +38,7 @@ public abstract class ActionService {
     protected List<Integer> generateLedMask(Integer start, Integer end) {
         return IntStream.rangeClosed(0, end)
             .mapToObj(i -> i >= start ? i - start + 1 : 0) // Mask for the color array.
-                                               // 0 = set null, > 0 = set base color
+                                                           // 0 = set null, > 0 = set color
             .collect(Collectors.toList());
     }
 
@@ -56,7 +56,16 @@ public abstract class ActionService {
             .collect(Collectors.toList());
     }
 
-    protected List<Color> passWhitelistedColors(List<Color> colors, List<Section.Subsection> subsections) {
+    protected List<Color> passEveryDesiredColors(List<Color> colors, Integer start, Integer every) {
+        if (every == null)
+            return colors;
+
+        return IntStream.range(0, colors.size())
+            .mapToObj(i -> i >= start && (i-start) % every == 0 ? colors.get(i) : null)
+            .collect(Collectors.toList());
+    }
+
+    protected List<Color> passSubsectionColors(List<Color> colors, List<Section.Subsection> subsections) {
         if (subsections == null)
             return colors;
 

@@ -86,6 +86,9 @@ The actual event for executing the flow. Action body can have following actions:
             {
                 "start": 8,
                 "end": 15,
+                "every": 2, // Optional. Light only every X light. Other lights will be nulls so they can be used
+                            // with other sections. Otherwise they will be filled according to resetColors-option.
+                            // In this example, every second light will be used (8, 10, 12 etc.)
                 "type": "RANDOM_BLINK", // Random blink example
                 "colors": [
                     { // In this example we will request white and blue random blinking

@@ -25,6 +25,11 @@ public class SectionBuilder {
         return this;
     }
 
+    public SectionBuilder setEvery(Integer every) {
+        section.setEvery(every);
+        return this;
+    }
+
     public SectionBuilder setSubsections(List<Section.Subsection> subsections) {
         section.setSubsections(subsections);
         return this;
