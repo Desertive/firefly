@@ -1,7 +1,6 @@
 package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
@@ -11,7 +10,6 @@ import java.util.stream.IntStream;
 import com.desertive.firefly.core.data.models.TransitionStep;
 import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 import com.desertive.firefly.core.data.utils.ActionRequestUtil;
-import com.desertive.firefly.core.data.utils.ColorUtil;
 
 public abstract class ActionService {
 
@@ -54,29 +52,6 @@ public abstract class ActionService {
             .mapToObj(i -> i >= start ? maskedIndexes.contains(i) ? i + 2 : 1 : 0) // Mask for the color array.
                                                                                    // >= 2 = primary color, 1 = background color, 0 = null
             .collect(Collectors.toList());
-    }
-
-    protected List<Color> passEveryDesiredColors(List<Color> colors, Integer start, Integer every) {
-        if (every == null)
-            return colors;
-
-        return IntStream.range(0, colors.size())
-            .mapToObj(i -> i >= start && (i-start) % every == 0 ? colors.get(i) : null)
-            .collect(Collectors.toList());
-    }
-
-    protected List<Color> passSubsectionColors(List<Color> colors, List<Section.Subsection> subsections) {
-        if (subsections == null)
-            return colors;
-
-        return subsections.stream()
-            .reduce(new ArrayList<>(), (List<Color> output, Section.Subsection subsection) ->
-                IntStream.range(0, colors.size())
-                    .mapToObj(i -> i >= subsection.getStart() && i <= subsection.getEnd() &&
-                        ColorUtil.colorExists(colors, i) ? colors.get(i) :
-                        ColorUtil.colorExists(output, i) ? output.get(i) : null)
-                    .collect(Collectors.toList())
-            , (a, b) -> a);
     }
 
     public abstract List<TransitionStep> generateTransitionSteps(Section section);

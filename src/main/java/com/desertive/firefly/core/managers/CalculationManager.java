@@ -1,8 +1,12 @@
 package com.desertive.firefly.core.managers;
 
+import java.awt.Color;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
+import com.desertive.firefly.core.data.utils.ColorUtil;
 import com.desertive.firefly.core.services.FrameService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -33,7 +37,38 @@ public class CalculationManager {
     }
 
     List<TransitionStep> convertSectionsIntoSteps(Section section) {
-        return actionServiceFactory.getInstance(section.getType()).generateTransitionSteps(section);
+        return actionServiceFactory.getInstance(section.getType())
+            .generateTransitionSteps(section).stream()
+            .map(step -> passEveryRequestedColor(step, section.getStart(), section.getEvery()))
+            .map(step -> passSubsectionColors(step, section.getSubsections()))
+            .collect(Collectors.toList());
+    }
+
+    TransitionStep passEveryRequestedColor(TransitionStep step, Integer start, Integer every) {
+        if (every == null)
+            return step;
+
+        List<Color> colors = step.getColors();
+
+        return new TransitionStep(IntStream.range(0, colors.size())
+            .mapToObj(i -> i >= start && (i-start) % every == 0 ? colors.get(i) : null)
+            .collect(Collectors.toList()), step.getTransitionTime(), step.getSleep());
+    }
+
+    TransitionStep passSubsectionColors(TransitionStep step, List<Section.Subsection> subsections) {
+        if (subsections == null)
+            return step;
+
+        List<Color> colors = step.getColors();
+
+        return new TransitionStep(subsections.stream()
+            .reduce(new ArrayList<>(), (List<Color> output, Section.Subsection subsection) ->
+                    IntStream.range(0, colors.size())
+                        .mapToObj(i -> i >= subsection.getStart() && i <= subsection.getEnd() &&
+                            ColorUtil.colorExists(colors, i) ? colors.get(i) :
+                            ColorUtil.colorExists(output, i) ? output.get(i) : null)
+                        .collect(Collectors.toList())
+                , (a, b) -> a), step.getTransitionTime(), step.getSleep());
     }
 
 }
