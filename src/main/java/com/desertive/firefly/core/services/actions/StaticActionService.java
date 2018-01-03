@@ -26,11 +26,7 @@ public class StaticActionService extends ActionService {
             .collect(Collectors.toList());
 
         // Because there are no animation, build one step and return it
-        return Arrays.asList(new TransitionStep(
-            passEveryDesiredColors(
-                passSubsectionColors(colors, section.getSubsections()),
-                section.getStart(), section.getEvery())
-        ));
+        return Arrays.asList(new TransitionStep(colors));
     }
 
 }
