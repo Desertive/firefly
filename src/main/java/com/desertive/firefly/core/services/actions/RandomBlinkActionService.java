@@ -32,8 +32,8 @@ public class RandomBlinkActionService extends ActionService {
 
         return IntStream.range(0, steps)
             .mapToObj(i -> new TransitionStep(
-                super.generateRandomLedMask(section.getStart(), section.getEnd(), blinkerCount).stream()
-                    .map(mask -> mask >= 2 ? colors.get(mask % colors.size()) : mask == 1 ? fillColor : null)
+                super.generateRandomRunningNumbers(section.getStart(), section.getEnd(), blinkerCount).stream()
+                    .map(mask -> mask >= 1 ? colors.get(mask % colors.size()) : fillColor )
                     .collect(Collectors.toList()),
                 transition
             ))

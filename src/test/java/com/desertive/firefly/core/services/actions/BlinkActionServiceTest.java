@@ -40,16 +40,10 @@ public class BlinkActionServiceTest {
     }
 
     @Test
-    public void firstTransitionStepLedListShouldContainOneNullAndThreeBlackColors() {
+    public void firstTransitionStepLedListShouldContainThreeBlackColors() {
         List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSection());
 
         List<Color> colors = transitionSteps.get(0).getColors();
-
-        List<Color> nullColors = colors
-            .stream()
-            .filter(item -> item == null)
-            .collect(Collectors.toList());
-        assertEquals(nullColors.size(), 1);
 
         List<Color> containsColor = colors
             .stream()
@@ -59,16 +53,10 @@ public class BlinkActionServiceTest {
     }
     
     @Test
-    public void secondTransitionStepLedListShouldContainOneNullAndThreeBaseColors() {
+    public void secondTransitionStepLedListShouldContainThreeBaseColors() {
         List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSection());
 
         List<Color> colors = transitionSteps.get(1).getColors();
-
-        List<Color> nullColors = colors
-            .stream()
-            .filter(item -> item == null)
-            .collect(Collectors.toList());
-        assertEquals(nullColors.size(), 1);
 
         List<Color> containsColor = colors
             .stream()

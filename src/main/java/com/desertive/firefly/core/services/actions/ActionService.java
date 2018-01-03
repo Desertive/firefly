@@ -33,14 +33,13 @@ public abstract class ActionService {
             ActionRequestUtil.getIntPropertyOrDefault(properties, "b", color.getBlue()));
     }
 
-    protected List<Integer> generateLedMask(Integer start, Integer end) {
-        return IntStream.rangeClosed(0, end)
-            .mapToObj(i -> i >= start ? i - start + 1 : 0) // Mask for the color array.
-                                                           // 0 = set null, > 0 = set color
+    protected List<Integer> generateRunningNumbers(Integer start, Integer end) {
+        return IntStream.rangeClosed(0, end-start)
+            .boxed()
             .collect(Collectors.toList());
     }
 
-    protected List<Integer> generateRandomLedMask(Integer start, Integer end, Integer count) {
+    protected List<Integer> generateRandomRunningNumbers(Integer start, Integer end, Integer count) {
         List<Integer> randomNumbers = IntStream.range(start, end)
                 .boxed()
                 .collect(Collectors.toList());
@@ -48,12 +47,15 @@ public abstract class ActionService {
         
         List<Integer> maskedIndexes = randomNumbers.subList(0, randomNumbers.size() >= count ? count : randomNumbers.size());
         
-        return IntStream.rangeClosed(0, end)
-            .mapToObj(i -> i >= start ? maskedIndexes.contains(i) ? i + 2 : 1 : 0) // Mask for the color array.
-                                                                                   // >= 2 = primary color, 1 = background color, 0 = null
+        return IntStream.rangeClosed(0, end-start)
+            .mapToObj(i -> maskedIndexes.contains(i) ? i + 1 : 0) // Mask for the color array.
+                                                                  // >= 1 = primary color, 0 = background color
             .collect(Collectors.toList());
     }
 
+    /*
+     * Generates transition steps with desired color arrays without null colors.
+     */
     public abstract List<TransitionStep> generateTransitionSteps(Section section);
 
 }

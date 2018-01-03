@@ -18,11 +18,11 @@ public class StaticActionService extends ActionService {
         List<Color> reqColors = super.getColorsOrThrow(section.getColors());
 
         // Construct color mask
-        List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());
+        List<Integer> maskList = super.generateRunningNumbers(section.getStart(), section.getEnd());
 
         // Init color array
         List<Color> colors = maskList.stream()
-            .map(mask -> mask >= 1 ? reqColors.get((mask - 1) % reqColors.size()) : null) // Set color based to mask
+            .map(mask -> reqColors.get(mask % reqColors.size())) // Set color based to mask
             .collect(Collectors.toList());
 
         // Because there are no animation, build one step and return it

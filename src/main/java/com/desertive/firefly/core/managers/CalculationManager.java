@@ -2,6 +2,7 @@ package com.desertive.firefly.core.managers;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
@@ -40,6 +41,7 @@ public class CalculationManager {
         return actionServiceFactory.getInstance(section.getType())
             .generateTransitionSteps(section).stream()
             .map(step -> passEveryRequestedColor(step, section.getStart(), section.getEvery()))
+            .map(step -> addStartingNulls(step, section.getStart(), section.getEnd()))
             .map(step -> passSubsectionColors(step, section.getSubsections()))
             .collect(Collectors.toList());
     }
@@ -48,18 +50,30 @@ public class CalculationManager {
         if (every == null)
             return step;
 
-        List<Color> colors = step.getColors();
+        final List<Color> colors = step.getColors();
 
         return new TransitionStep(IntStream.range(0, colors.size())
-            .mapToObj(i -> i >= start && (i-start) % every == 0 ? colors.get(i) : null)
+            .mapToObj(i -> i % every == 0 ? colors.get(i) : null)
             .collect(Collectors.toList()), step.getTransitionTime(), step.getSleep());
+    }
+
+    TransitionStep addStartingNulls(TransitionStep step, int start, int end) {
+        final List<Color> colors = new ArrayList<Color>() {{
+            addAll(Collections.nCopies(start, null));
+            addAll(step.getColors());
+        }};
+        // Let's check just in case that color array doesn't go beyond section's ending point
+        if (colors.size() > end + 1) {
+            throw new RuntimeException("Color array goes beyond section ending point");
+        }
+        return new TransitionStep(colors, step.getTransitionTime(), step.getSleep());
     }
 
     TransitionStep passSubsectionColors(TransitionStep step, List<Section.Subsection> subsections) {
         if (subsections == null)
             return step;
 
-        List<Color> colors = step.getColors();
+        final List<Color> colors = step.getColors();
 
         return new TransitionStep(subsections.stream()
             .reduce(new ArrayList<>(), (List<Color> output, Section.Subsection subsection) ->
