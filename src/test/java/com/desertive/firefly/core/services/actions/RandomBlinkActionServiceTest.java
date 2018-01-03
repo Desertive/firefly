@@ -39,12 +39,6 @@ public class RandomBlinkActionServiceTest {
                 List<TransitionStep> steps = actionService.generateTransitionSteps(buildSection());
                 assertEquals(steps.size(), 4);
 
-                List<TransitionStep> stepsContainingFirstNull = steps
-                    .stream()
-                    .filter(step -> step.getColors().get(0) == null)
-                    .collect(Collectors.toList());
-                assertEquals(stepsContainingFirstNull.size(), 4);
-
                 List<Color> flatMapColors = steps
                     .stream()
                     .map(step -> step.getColors())

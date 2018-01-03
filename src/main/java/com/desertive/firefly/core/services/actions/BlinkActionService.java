@@ -2,6 +2,7 @@ package com.desertive.firefly.core.services.actions;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -31,14 +32,9 @@ public class BlinkActionService extends ActionService {
         // One frame represents the actual color so thats why we will minus one.
         int transitionTime = ActionRequestUtil.getIntPropertyOrThrow(section.getProperties(), "transition") - 1;
 
-        // Construct color mask
-        List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());
-
         return colors.stream()
                 .map(color -> new TransitionStep(
-                    maskList.stream()
-                            .map(mask -> mask >= 1 ? color : null) // Set base color based to mask
-                            .collect(Collectors.toList()),
+                    Collections.nCopies(section.getEnd() - section.getStart() + 1, color),
                     transitionTime
                 ))
                 .collect(Collectors.toList());

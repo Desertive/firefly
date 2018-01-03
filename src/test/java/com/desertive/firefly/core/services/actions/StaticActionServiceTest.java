@@ -40,16 +40,10 @@ public class StaticActionServiceTest {
     }
 
     @Test
-    public void transitionStepLedListShouldContainThreeNullsAndFourColors() {
+    public void transitionStepLedListShouldContainFourColors() {
         List<TransitionStep> transitionSteps = actionService.generateTransitionSteps(buildSection());
 
         List<Color> colors = transitionSteps.get(0).getColors();
-
-        List<Color> nullColors = colors
-            .stream()
-            .filter(item -> item == null)
-            .collect(Collectors.toList());
-        assertEquals(nullColors.size(), 3);
 
         List<Color> containsColor = colors
             .stream()

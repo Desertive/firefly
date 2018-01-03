@@ -48,7 +48,7 @@ public class WaveActionService extends ActionService {
         int direction = ActionRequestUtil.getIntPropertyOrDefault(section.getProperties(), "direction", 0);
 
         // Construct color mask
-        List<Integer> maskList = super.generateLedMask(section.getStart(), section.getEnd());
+        List<Integer> maskList = super.generateRunningNumbers(section.getStart(), section.getEnd());
 
         // Easing, hard coded for now. Could be changed through the request in the future
         EasingService easingService = easingServiceFactory.getInstance(EasingType.LINEAR);
@@ -71,7 +71,6 @@ public class WaveActionService extends ActionService {
         List<TransitionStep> steps = IntStream.range(0, matchedGradient.size())
             .mapToObj(i -> shiftColors(matchedGradient, i))
             .map(list -> reverseListIfRequested(list, direction))
-            .map(list -> addStartingNulls(list, section.getStart()))
             .map(list -> new TransitionStep(list, speed / fullGradient.size() - 1, 1))
             .collect(Collectors.toList());
 
@@ -104,13 +103,6 @@ public class WaveActionService extends ActionService {
         return IntStream.range(0, colors.size())
             .mapToObj(i -> colors.get((i + shift) % colors.size()))
             .collect(Collectors.toList());
-    }
-
-    List<Color> addStartingNulls(List<Color> colors, int nullCount) {
-        return new ArrayList<Color>() {{
-            addAll(Collections.nCopies(nullCount, null));
-            addAll(colors);
-        }};
     }
 
 }
