@@ -11,7 +11,7 @@ import com.desertive.firefly.core.data.models.requests.ActionRequest.Section;
 public class StaticActionService extends ActionService {
 
     /*
-     * Static action presents only one static color without animation
+     * Static action presents only static color(s) without animation
      */
     public List<TransitionStep> generateTransitionSteps(Section section) {
         // Get desired colors

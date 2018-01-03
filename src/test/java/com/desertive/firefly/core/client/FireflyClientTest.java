@@ -72,7 +72,7 @@ public class FireflyClientTest {
                 List<Frame> frames = fireflyClient.process(request(Arrays.asList(
                     new SectionBuilder()
                         .setStart(0)
-                        .setEnd(1)
+                        .setEnd(2)
                         .setType(ActionType.STATIC)
                         .addColor(242, 194, 8)
                         .addColor(1, 1, 1)
@@ -97,6 +97,8 @@ public class FireflyClientTest {
                 assertTrue(getFrameColor(frames, 0, 1)
                     .equals(new Color(1, 1, 1)));
                 assertTrue(getFrameColor(frames, 0, 2)
+                    .equals(new Color(242, 194, 64)));
+                assertTrue(getFrameColor(frames, 0, 3)
                     .equals(new Color(51, 46, 64)));
                 assertTrue(getFrameColor(frames, 0, 5)
                     .equals(new Color(51, 46, 64)));

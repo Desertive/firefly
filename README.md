@@ -150,6 +150,8 @@ The actual event for executing the flow. Action body can have following actions:
 
 You can have as many sections as you like. One section might have blue static light, other could have some smooth white blinking etc.
 
+Sections can also overlap each other. Colors will be merged so that greater red, greater green and greater blue will be used.
+
 # Progress
 :white_check_mark: Socket.io server
 

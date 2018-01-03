@@ -61,12 +61,29 @@ public class FrameService {
 
     Frame mergeFrames(Frame frame, Frame input) {
         List<Color> colors = IntStream.range(0, Math.max(input.getColors().size(), frame.getColors().size()))
-            .mapToObj(i -> ColorUtil.colorExists(input.getColors(), i) ? input.getColors().get(i) : // If input color is present, return it.
-                ColorUtil.colorExists(frame.getColors(), i) ? frame.getColors().get(i) : // Else if existing color is present, return it.
-                    null) // Else return null
+            .mapToObj(i -> {
+                    boolean inputColorExists = ColorUtil.colorExists(input.getColors(), i);
+                    boolean frameColorExists = ColorUtil.colorExists(frame.getColors(), i);
+                    if (inputColorExists && frameColorExists) {
+                        return mergeColors(frame.getColors().get(i), input.getColors().get(i));
+                    } else if (inputColorExists) {
+                        return input.getColors().get(i);
+                    } else if (frameColorExists) {
+                        return frame.getColors().get(i);
+                    } else {
+                        return null;
+                    }
+                })
             .collect(Collectors.toList());
         return new Frame(colors);
+    }
 
+    Color mergeColors(Color frame, Color input) {
+        return new Color(
+            Math.max(frame.getRed(), input.getRed()),
+            Math.max(frame.getGreen(), input.getGreen()),
+            Math.max(frame.getBlue(), input.getBlue())
+        );
     }
     
     List<Frame> createFrames(TransitionStep current, TransitionStep next) {
