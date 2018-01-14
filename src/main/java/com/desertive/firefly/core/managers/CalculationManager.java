@@ -63,7 +63,7 @@ public class CalculationManager {
             addAll(step.getColors());
         }};
         // Let's check just in case that color array doesn't go beyond section's ending point
-        if (colors.size() > end + 1) {
+        if (colors.size() - 1 > end) {
             throw new RuntimeException("Color array goes beyond section ending point");
         }
         return new TransitionStep(colors, step.getTransitionTime(), step.getSleep());
