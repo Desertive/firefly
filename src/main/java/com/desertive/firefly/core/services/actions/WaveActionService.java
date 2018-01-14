@@ -70,6 +70,7 @@ public class WaveActionService extends ActionService {
 
         List<TransitionStep> steps = IntStream.range(0, matchedGradient.size())
             .mapToObj(i -> shiftColors(matchedGradient, i))
+            .map(list -> list.subList(0, section.getEnd() - section.getStart() + 1))
             .map(list -> reverseListIfRequested(list, direction))
             .map(list -> new TransitionStep(list, speed / fullGradient.size() - 1, 1))
             .collect(Collectors.toList());
